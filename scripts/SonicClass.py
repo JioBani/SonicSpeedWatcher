@@ -38,11 +38,13 @@ class Sonic:
             if(isIn) :
                 if(distance > self.triggerDistance) :
                     outTime =  time.time()
-                    transmitTime = outTime - inTime
+                    noiseStart = time.time()
+                    while True:
+                        if(time.time() - noiseStart > 0.01 and distance > self.triggerDistance):
+                            transmitTime = outTime - inTime
+                            self.onOut(transmitTime)
+                            isIn = False
 
-                    if(transmitTime > 0.01):
-                        self.onOut(transmitTime)
-                        isIn = False
             else:
                 if(distance < self.triggerDistance) :
                     isIn = True
