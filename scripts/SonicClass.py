@@ -32,15 +32,19 @@ class Sonic:
 
     def sonicLoop(self):
         isIn = False
+        inTime = 0
         while True:
             distance = self.measureDistance()
             if(isIn) :
                 if(distance > self.triggerDistance) :
                     isIn = False
+                    outTime =  time.time()
                     self.onOut()
+                    print(outTime - inTime)
             else:
                 if(distance < self.triggerDistance) :
                     isIn = True
+                    inTime = time.time()
                     self.onIn()
 
     def startLoop(self):
