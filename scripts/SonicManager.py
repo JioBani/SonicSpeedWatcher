@@ -5,6 +5,9 @@ import SonicClass
 def onIn() :
   print("들어옴")
 
+def onOut() :
+  print("나감")
+
 # 전역 변수 선언 및 초기화
 trigger = 24
 echo = 23
