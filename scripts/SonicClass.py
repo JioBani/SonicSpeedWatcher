@@ -38,4 +38,4 @@ class Sonic:
     def startLoop(self):
         t1 = threading.Thread(target=self.sonicLoop)
         t1.daemon = True
-        t1.start
+        t1.start()
