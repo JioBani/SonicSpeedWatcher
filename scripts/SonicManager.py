@@ -5,8 +5,9 @@ import SonicClass
 def onIn() :
   print("들어옴")
 
-def onOut() :
-  print("나감")
+def onOut(time) :
+  print("나감 : " + time)
+
 
 # 전역 변수 선언 및 초기화
 trigger = 24
