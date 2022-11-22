@@ -31,5 +31,4 @@ class Sonic:
     def sonicLoop(self):
         while True:
             distance = self.measureDistance()
-            if(distance > self.triggerDistance) :
-                print(distance)
+            print(distance)
