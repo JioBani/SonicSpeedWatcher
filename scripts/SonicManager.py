@@ -6,7 +6,7 @@ def onIn() :
   print("들어옴")
 
 def onOut(time) :
-  print("나감 : " + time)
+  print("나감 : %f" % time)
 
 
 # 전역 변수 선언 및 초기화
