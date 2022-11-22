@@ -1,3 +1,7 @@
+import time
+import RPi.GPIO as GPIO
+import SonicClass
+
 class Sonic:
 
     def __init__(self , _trigger,_echo):
