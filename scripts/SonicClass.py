@@ -26,9 +26,10 @@ class Sonic:
         pulse_end = time.time() # 신호 0. 초음파 수신 완료를 알림
 
         pulse_duration = pulse_end - pulse_start
-        return 340*1000/2*pulse_duration
+        return 340*10000/2*pulse_duration
 
     def sonicLoop(self):
         while True:
             distance = self.measureDistance()
-            print(distance)
+            if(distance > self.triggerDistance) :
+                print(distance)
