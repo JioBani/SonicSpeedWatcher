@@ -37,9 +37,12 @@ class Sonic:
             distance = self.measureDistance()
             if(isIn) :
                 if(distance > self.triggerDistance) :
-                    isIn = False
                     outTime =  time.time()
-                    self.onOut(outTime - inTime)
+                    transmitTime = outTime - inTime
+
+                    if(transmitTime > 0.01):
+                        self.onOut(transmitTime)
+                        isIn = False
             else:
                 if(distance < self.triggerDistance) :
                     isIn = True
