@@ -3,8 +3,8 @@ import RPi.GPIO as GPIO
 import SonicClass
 
 # 전역 변수 선언 및 초기화
-trigger = 20
-echo = 16
+trigger = 24
+echo = 23
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(trigger, GPIO.OUT)
