@@ -1,7 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-import SonicClass
-import threading
+from threading import Thread
 
 class Sonic:
 
