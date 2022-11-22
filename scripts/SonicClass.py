@@ -4,10 +4,11 @@ from threading import Thread
 
 class Sonic:
 
-    def __init__(self , _trigger,_echo):
+    def __init__(self , _trigger,_echo,_onIn):
         self.trigger = _trigger
         self.echo = _echo
         self.triggerDistance = 0
+        self.onIn = _onIn
 
     def measureDistance(self):
 
@@ -32,9 +33,8 @@ class Sonic:
         while True:
             distance = self.measureDistance()
             if(distance < self.triggerDistance) :
-                print(distance)
+                self.onIn()
 
     def startLoop(self):
-        t1 = Thread(target=self.sonicLoop,args=self)
-        #t1.daemon = True
+        t1 = Thread(target=self.sonicLoop)
         t1.start()
