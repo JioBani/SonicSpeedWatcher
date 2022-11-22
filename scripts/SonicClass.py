@@ -7,6 +7,7 @@ class Sonic:
     def __init__(self , _trigger,_echo):
         self.trigger = _trigger
         self.echo = _echo
+        self.triggerDistance = 0
 
     def measureDistance(self):
 
@@ -30,4 +31,5 @@ class Sonic:
     def sonicLoop(self):
         while True:
             distance = self.measureDistance()
-            print(distance)
+            if(distance > self.triggerDistance) :
+                print(distance)
