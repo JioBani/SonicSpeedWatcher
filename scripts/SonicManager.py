@@ -14,7 +14,7 @@ GPIO.setup(trigger, GPIO.OUT)
 GPIO.setup(echo, GPIO.IN)
 GPIO.output(trigger, False)
 
-startSonic = SonicClass.Sonic(trigger , echo)
+startSonic = SonicClass.Sonic(trigger , echo,onIn)
 startSonic.triggerDistance = 1000
 startSonic.startLoop()
 startSonic.onIn = onIn
