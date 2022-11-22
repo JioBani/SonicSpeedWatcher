@@ -1,6 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 import SonicClass
+import threading
 
 class Sonic:
 
@@ -31,5 +32,9 @@ class Sonic:
     def sonicLoop(self):
         while True:
             distance = self.measureDistance()
-            if(distance > self.triggerDistance) :
+            if(distance < self.triggerDistance) :
                 print(distance)
+
+    def startLoop(self):
+        t1 = threading.Thread(target=self.sonicLoop)
+        t1.start
