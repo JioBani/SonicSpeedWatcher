@@ -44,6 +44,7 @@ class Sonic:
                             transmitTime = outTime - inTime
                             self.onOut(transmitTime)
                             isIn = False
+                            break
 
             else:
                 if(distance < self.triggerDistance) :
