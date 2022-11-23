@@ -1,12 +1,13 @@
 import time
 import RPi.GPIO as GPIO
 from threading import Thread
+from GpioManager import GpioManager
 
 class Sonic:
 
-    def __init__(self , _trigger,_echo,_onIn,_onOut):
-        self.trigger = _trigger
-        self.echo = _echo
+    def __init__(self ,_onIn,_onOut):
+        self.trigger = GpioManager.trigger
+        self.echo = GpioManager.echo
         self.triggerDistance = 0
         self.onIn = _onIn
         self.onOut = _onOut
