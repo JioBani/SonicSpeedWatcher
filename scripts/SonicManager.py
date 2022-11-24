@@ -16,6 +16,12 @@ gpioManager.init()
 startSonic = SonicClass.Sonic(onIn,onOut)
 startSonic.triggerDistance = 1000
 startSonic.onIn = onIn
-startSonic.startLoop()
+
 
 while True:
+  startSonic.startLoop()
+  a = input()
+  if(a == 'exit') : break
+  startSonic.stopRun()
+  a = input("재개하려면 아무키나 누르세요.")
+  if(a == 'exit') : break
