@@ -1,5 +1,5 @@
 import time
-import SonicClass
+import SonicProcess
 from GpioManager import GpioManager
 
 def onOut(time) :
@@ -20,8 +20,8 @@ def onPassExit(time):
 gpioManager = GpioManager()
 gpioManager.init()
 
-enterSonic = SonicClass.Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
-#exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
+enterSonic = SonicProcess.Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
+#exitSonic = SonicProcess.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
 enterSonic.onOut = onPassEnter
 #exitSonic.onOut = onPassExit
 
