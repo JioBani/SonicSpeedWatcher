@@ -46,7 +46,7 @@ def measureDistance(trigger , echo):
 
 def loop(trigger , echo):
   while True:
-    measureDistance(trigger , echo)
+    print(measureDistance(trigger , echo))
 
 
 #enterSonic = SonicClass.Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onOut)
