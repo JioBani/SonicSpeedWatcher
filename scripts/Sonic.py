@@ -35,6 +35,7 @@ class Sonic(Thread):
         return 340*10000/2*pulse_duration
 
     def run(self):
+        print("시작")
         while True:
             distance = self.measureDistance()
             #print(distance)
@@ -70,6 +71,7 @@ class NThreadSonic:
         return 340*10000/2*pulse_duration
 
     def run(self):
+        print("시작")
         while True:
             distance = self.measureDistance()
             #print(distance)
