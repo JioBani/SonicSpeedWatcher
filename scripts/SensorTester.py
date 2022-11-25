@@ -9,7 +9,7 @@ gpioManager.init()
 def onOut(time):
   print("감지")
 
-def measureDistance(self):
+def measureDistance():
 
     '''
     물체의 거리를 mm 단위로 반환
@@ -31,4 +31,5 @@ def measureDistance(self):
 #enterSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho, 1000 ,onOut)
 #enterSonic.startRun()
 while True:
-  print(measureDistance)
+  print(measureDistance())
+  time.sleep(1)
