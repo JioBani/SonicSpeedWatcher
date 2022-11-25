@@ -46,6 +46,6 @@ def measureDistance(trigger , echo):
 #exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onOut)
 
 while True:
-  measureDistance(GpioManager.enterTrigger , GpioManager.enterEcho)
-  measureDistance(GpioManager.exitTrigger ,GpioManager.exitEcho )
+  print(measureDistance(GpioManager.enterTrigger , GpioManager.enterEcho))
+  print(measureDistance(GpioManager.exitTrigger ,GpioManager.exitEcho ))
   time.sleep(1)
