@@ -62,8 +62,8 @@ class Sonic(Thread):
 
     def startRun(self):
         print("작동중")
-        self.start()
         self.setRun = True
+        self.start()
 
     def stopRun(self):
         print("중지")
