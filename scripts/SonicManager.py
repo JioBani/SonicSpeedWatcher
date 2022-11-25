@@ -25,3 +25,5 @@ exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,
 enterSonic.onOut = onPassEnter
 
 enterSonic.startRun()
+while True :
+  input("멈추려면 아무키나 눌러주세요")
