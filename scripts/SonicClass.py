@@ -54,6 +54,7 @@ class Sonic:
 
             else:
                 if(distance < self.triggerDistance) :
+                    print("들어옴")
                     isIn = True
                     inTime = time.time()
 
