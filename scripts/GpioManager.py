@@ -1,8 +1,10 @@
 import RPi.GPIO as GPIO
 
 class GpioManager:
-    trigger = 24
-    echo = 23
+    enterTrigger = 6
+    enterEcho = 5
+    exitTrigger = 24
+    exitEcho = 23
 
     def __init__(self) : None
 
@@ -12,6 +14,9 @@ class GpioManager:
         self.setSonic()
 
     def setSonic(self):
-        GPIO.setup(GpioManager.trigger, GPIO.OUT)
-        GPIO.setup(GpioManager.echo, GPIO.IN)
-        GPIO.output(GpioManager.trigger, False)
+        GPIO.setup(GpioManager.enterTrigger, GPIO.OUT)
+        GPIO.setup(GpioManager.enterEcho, GPIO.IN)
+        GPIO.setup(GpioManager.exitTrigger, GPIO.OUT)
+        GPIO.setup(GpioManager.exitEcho, GPIO.IN)
+        GPIO.output(GpioManager.enterTrigger, False)
+        GPIO.output(GpioManager.exitTrigger, False)

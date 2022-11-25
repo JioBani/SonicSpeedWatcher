@@ -5,19 +5,24 @@ from GpioManager import GpioManager
 def onOut(time) :
   print("나감 : %f" % time)
 
+def onPassEnter(time):
+  exitSonic.startRun()
+  print("입장 시간 : %f" % time)
+  pass
+
+def onPassExit(time):
+  exitSonic.stopRun()
+  print("퇴장 시간 : %f" % time)
+  pass
+
 # 전역 변수 선언 및 초기화
 
 gpioManager = GpioManager()
 gpioManager.init()
 
-startSonic = SonicClass.Sonic(GpioManager.trigger,GpioManager.echo,onOut)
-startSonic.triggerDistance = 1000
-startSonic.onIn = onIn
+enterSonic = SonicClass.Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
+exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
+enterSonic.onOut = onPassEnter
 
 while True:
-  startSonic.startRun()
-  a = input()
-  if(a == 'exit') : break
-  startSonic.stopRun()
-  a = input("재개하려면 아무키나 누르세요.")
-  if(a == 'exit') : break
+  if(enterSonic.run == False) : enterSonic.startRun()

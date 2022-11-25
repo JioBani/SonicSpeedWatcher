@@ -6,10 +6,10 @@ from GpioManager import GpioManager
 
 class Sonic:
 
-    def __init__(self ,trigger , echo, _onOut):
+    def __init__(self ,trigger , echo, triggerDistance , _onOut):
         self.trigger = trigger
         self.echo = echo
-        self.triggerDistance = 0
+        self.triggerDistance = triggerDistance
         self.onOut = _onOut
         self.run = False
         self.thread = None
