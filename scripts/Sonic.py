@@ -37,6 +37,7 @@ class Sonic(Thread):
     def run(self):
         while True:
             distance = self.measureDistance()
+            print(distance)
             if(distance <self.triggerDistance ) :
                 print("넘음")
 
