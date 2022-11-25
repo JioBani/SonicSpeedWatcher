@@ -89,6 +89,7 @@ sonic1 = SonicThread(GpioManager.enterTrigger , GpioManager.enterEcho)
 sonic2 = SonicThread(GpioManager.exitTrigger , GpioManager.exitEcho)
 
 sonic1.start()
+sonic2.start()
 
 while True:
   pass
