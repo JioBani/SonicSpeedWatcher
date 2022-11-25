@@ -14,6 +14,7 @@ class SonicThread(Thread):
     self.trigger = trigger
     self.echo = echo
     self.flag = True
+    self.setRun = True
 
   def run(self):
     self.sonicLoop()
