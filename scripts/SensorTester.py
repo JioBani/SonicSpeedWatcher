@@ -19,7 +19,7 @@ class SonicThread(Thread):
       print(self.measureDistance(self.trigger,self.echo))
       time.sleep(1)
 
-  def measureDistance(trigger , echo):
+  def measureDistance(self, trigger , echo):
 
       GPIO.output(trigger, True) # 신호 1 발생
       GPIO.output(trigger, False) # 신호 0 발생(falling 에지)
