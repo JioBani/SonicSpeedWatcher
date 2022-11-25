@@ -85,12 +85,12 @@ gpioManager = GpioManager()
 gpioManager.init()
 gpioManager.setSonic()
 
-#sonic = Sonic(GpioManager.enterTrigger , GpioManager.enterEcho , onOut)
+sonic = Sonic(GpioManager.enterTrigger , GpioManager.enterEcho , onOut)
 
-#sonic.start()
+sonic.start()
 
-sonic = NThreadSonic(GpioManager.enterTrigger , GpioManager.enterEcho , onOut)
-sonic.run()
+#sonic = NThreadSonic(GpioManager.enterTrigger , GpioManager.enterEcho , onOut)
+#sonic.run()
 
 while True:
     pass
