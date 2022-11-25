@@ -2,6 +2,8 @@ import time
 import SonicClass
 from GpioManager import GpioManager
 import RPi.GPIO as GPIO
+from threading import Thread
+
 
 gpioManager = GpioManager()
 gpioManager.init()
@@ -42,10 +44,20 @@ def measureDistance(trigger , echo):
     return 340*10000/2*pulse_duration
 
 
+def loop(trigger , echo):
+  while True:
+    measureDistance(trigger , echo)
+
+
 #enterSonic = SonicClass.Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onOut)
 #exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onOut)
 
+
+enterTh = Thread(target=loop(GpioManager.enterTrigger , GpioManager.enterEcho))
+exitTh = Thread(target=loop(GpioManager.exitTrigger ,GpioManager.exitEcho))
+
+enterTh.start()
+
+
 while True:
-  print(measureDistance(GpioManager.enterTrigger , GpioManager.enterEcho))
-  print(measureDistance(GpioManager.exitTrigger ,GpioManager.exitEcho ))
-  time.sleep(1)
+  pass
