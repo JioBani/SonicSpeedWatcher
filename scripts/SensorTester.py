@@ -7,8 +7,11 @@ from threading import Thread
 gpioManager = GpioManager()
 gpioManager.init()
 
+def onOut(time):
+  print(time)
+
 class SonicThread(Thread):
-  def __init__(self , trigger, echo):
+  def __init__(self , trigger, echo, onOut):
     Thread.__init__(self)
     self.daemon = True
     self.trigger = trigger
@@ -16,6 +19,7 @@ class SonicThread(Thread):
     self.flag = True
     self.setRun = True
     self.triggerDistance = 1000
+    self.onOut = onOut
 
   def run(self):
     self.sonicLoop()
@@ -59,8 +63,8 @@ class SonicThread(Thread):
                   inTime = time.time()
 
 
-sonic1 = SonicThread(GpioManager.enterTrigger , GpioManager.enterEcho)
-sonic2 = SonicThread(GpioManager.exitTrigger , GpioManager.exitEcho)
+sonic1 = SonicThread(GpioManager.enterTrigger , GpioManager.enterEcho,onOut)
+sonic2 = SonicThread(GpioManager.exitTrigger , GpioManager.exitEcho,onOut)
 
 sonic1.start()
 sonic2.start()
