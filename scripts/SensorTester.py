@@ -9,3 +9,4 @@ def onOut():
   print("감지")
 
 enterSonic = SonicClass.Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onOut)
+enterSonic.startRun()
