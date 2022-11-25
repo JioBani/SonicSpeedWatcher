@@ -7,7 +7,7 @@ class Sonic(Thread):
 
     def __init__(self , trigger, echo, onOut):
         Thread.__init__(self)
-        self.daemon = True
+        #self.daemon = True
         self.trigger = trigger
         self.echo = echo
         self.flag = True
@@ -37,7 +37,7 @@ class Sonic(Thread):
     def run(self):
         while True:
             distance = self.measureDistance()
-            print(distance)
+            #print(distance)
             if(distance <self.triggerDistance ) :
                 print("넘음")
 
