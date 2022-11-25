@@ -6,11 +6,10 @@ from GpioManager import GpioManager
 
 class Sonic:
 
-    def __init__(self ,_onIn,_onOut):
-        self.trigger = GpioManager.trigger
-        self.echo = GpioManager.echo
+    def __init__(self ,trigger , echo, _onOut):
+        self.trigger = trigger
+        self.echo = echo
         self.triggerDistance = 0
-        self.onIn = _onIn
         self.onOut = _onOut
         self.run = False
         self.thread = None
@@ -56,9 +55,8 @@ class Sonic:
                 if(distance < self.triggerDistance) :
                     isIn = True
                     inTime = time.time()
-                    self.onIn()
 
-    def startLoop(self):
+    def startRun(self):
         self.thread = Thread(target=self.sonicLoop)
         self.run = True
         self.thread.start()
