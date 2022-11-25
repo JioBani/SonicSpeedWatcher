@@ -47,7 +47,7 @@ class Sonic():
                         if(time.time() - noiseStart > 0.1 and distance > self.triggerDistance):
                             transmitTime = outTime - inTime
                             if(transmitTime > 0.01) :
-                                self.onOut(transmitTime)
+                                self.onOut(time.time())
                                 isIn = False
                             break
 
