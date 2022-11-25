@@ -57,7 +57,7 @@ class Sonic:
                     inTime = time.time()
 
     def startRun(self):
-        self.thread = Thread(target=self.sonicLoop)
+        self.thread = Thread(target=self.sonicLoop ,daemon=True)
         self.run = True
         self.thread.start()
 
