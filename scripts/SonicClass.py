@@ -13,7 +13,7 @@ class Sonic(Thread):
         self.echo = echo
         self.triggerDistance = triggerDistance
         self.onOut = _onOut
-        self.run = False
+        self.setRun = False
 
     def measureDistance(self):
 
@@ -37,13 +37,13 @@ class Sonic(Thread):
     def sonicLoop(self):
         isIn = False
         inTime = 0
-        while self.run:
+        while self.setRun:
             distance = self.measureDistance()
             if(isIn) :
                 if(distance > self.triggerDistance) :
                     outTime =  time.time()
                     noiseStart = time.time()
-                    while self.run:
+                    while self.setRun:
                         if(time.time() - noiseStart > 0.1 and distance > self.triggerDistance):
                             transmitTime = outTime - inTime
                             if(transmitTime > 0.01) :
@@ -56,11 +56,15 @@ class Sonic(Thread):
                     isIn = True
                     inTime = time.time()
 
+    def run(self):
+        self.sonicLoop()
+
     def startRun(self):
         print("작동중")
         self.start()
-        self.run = True
+        self.setRun = True
 
     def stopRun(self):
         print("중지")
-        self.run = False
+        self.setRun = False
+
