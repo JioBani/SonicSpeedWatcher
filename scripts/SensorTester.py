@@ -55,8 +55,8 @@ def loop(trigger , echo):
 
 i = input("입력(1,2,3)")
 
-enterTh = Thread(target=loop(GpioManager.enterTrigger , GpioManager.enterEcho))
 exitTh = Thread(target=loop(GpioManager.exitTrigger ,GpioManager.exitEcho))
+enterTh = Thread(target=loop(GpioManager.enterTrigger , GpioManager.enterEcho))
 
 if(i == 1) : enterTh.start()
 elif (i == 2) : exitTh.start()
