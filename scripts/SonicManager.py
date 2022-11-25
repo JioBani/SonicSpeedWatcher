@@ -1,5 +1,5 @@
 import time
-import SonicClass
+from Sonic import Sonic
 from GpioManager import GpioManager
 
 def onOut(time) :
@@ -19,13 +19,13 @@ def onPassExit(time):
 
 gpioManager = GpioManager()
 gpioManager.init()
+gpioManager.setSonic()
 
-enterSonic = SonicClass.Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
-#exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
-enterSonic.onOut = onPassEnter
-#exitSonic.onOut = onPassExit
+enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
+exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
 
-enterSonic.startRun()
-#exitSonic.startRun()
+enterSonic.start()
+enterSonic.start()
+
 while True :
   input("멈추려면 아무키나 눌러주세요")
