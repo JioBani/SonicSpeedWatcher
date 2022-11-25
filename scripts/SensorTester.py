@@ -57,7 +57,7 @@ enterTh = Thread(target=loop(GpioManager.enterTrigger , GpioManager.enterEcho))
 exitTh = Thread(target=loop(GpioManager.exitTrigger ,GpioManager.exitEcho))
 
 enterTh.start()
-
+exitTh.start()
 
 while True:
   pass
