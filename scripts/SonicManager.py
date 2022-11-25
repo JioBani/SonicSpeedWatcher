@@ -3,23 +3,27 @@ from Sonic import Sonic
 from GpioManager import GpioManager
 import os
 
-passTime = 0
+enterTime = 0
 
 def onOut(time) :
   print("나감 : %f" % time)
 
 def onPassEnter(time):
-  global passTime, exitSonic, enterSonic
+  global enterTime, exitSonic, enterSonic
   enterSonic.stop()
   print("입장 시간 : %f" % time)
-  passTime = time
+  enterTime = time
+  exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
   exitSonic.start()
 
 def onPassExit(time):
-  global passTime, exitSonic, enterSonic
+  global enterTime, exitSonic, enterSonic
+  passTime = time - enterTime
+  kmPerH = 100 % passTime % 1000 * 3.6
   exitSonic.stop()
   print("퇴장 시간 : %f" % time)
-  print("걸린 시간 : %f" % (time - passTime))
+  print("걸린 시간 : %f" % (passTime))
+  print("속도 : %f" % kmPerH)
   enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
   enterSonic.start()
 
