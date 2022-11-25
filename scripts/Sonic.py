@@ -64,3 +64,6 @@ class Sonic():
     def start(self):
       process = mp.Process(name="SubProcess", target=self.sonicLoop)
       process.start()
+
+    def stop(self) :
+        self.setRun = False

@@ -1,6 +1,7 @@
 import time
 from Sonic import Sonic
 from GpioManager import GpioManager
+import os
 
 passTime = 0
 
@@ -16,7 +17,7 @@ def onPassEnter(time):
 def onPassExit(time):
   print("퇴장 시간 : %f" % time)
   print("걸린 시간 : %f" % (time - passTime))
-  exitSonic.kill()
+  exitSonic.stop()
 
 # 전역 변수 선언 및 초기화
 
