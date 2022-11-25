@@ -1,26 +1,12 @@
 import time
-from threading import Thread
-class Sonic(Thread):
+import multiprocessing as mp
 
-    def __init__(self):
-        Thread.__init__(self)
+from multiprocessing import Process
 
-    def measureDistance(self):
-      return 1
+def func():
+    print("Hello world")
 
-    def run(self):
-        print("시작")
-        i = 0;
-        while True:
-            i = i + self.measureDistance()
-            #print(distance)
-            if(i > 1000) : print("넘음")
-
-sonic = Sonic()
-sonic.start()
-
-#sonic = NThreadSonic(GpioManager.enterTrigger , GpioManager.enterEcho , onOut)
-#sonic.run()
-
-while True:
-    pass
+if __name__ == '__main__':
+    p = Process(target=func)
+    p.start()
+    p.join()
