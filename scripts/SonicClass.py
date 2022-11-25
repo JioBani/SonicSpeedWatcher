@@ -48,6 +48,7 @@ class Sonic:
                             transmitTime = outTime - inTime
                             if(transmitTime > 0.01) :
                                 self.onOut(transmitTime)
+                                print(transmitTime)
                                 isIn = False
                             break
 
