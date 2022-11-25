@@ -15,7 +15,6 @@ def func():
 if __name__ == '__main__':
     p = Process(target=func)
     p.start()
-    p.join()
 
     i = 0
     while True :
