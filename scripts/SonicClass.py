@@ -4,16 +4,16 @@ from threading import Thread
 from threading import Event
 from GpioManager import GpioManager
 
-class Sonic:
+class Sonic(Thread):
 
     def __init__(self ,trigger , echo, triggerDistance , _onOut):
+        Thread.__init__(self)
+        self.daemon = True
         self.trigger = trigger
         self.echo = echo
         self.triggerDistance = triggerDistance
         self.onOut = _onOut
         self.run = False
-        self.thread = None
-        self.waitEvent = None
 
     def measureDistance(self):
 
@@ -58,9 +58,8 @@ class Sonic:
 
     def startRun(self):
         print("작동중")
-        self.thread = Thread(target=self.sonicLoop)
+        self.start()
         self.run = True
-        self.thread.start()
 
     def stopRun(self):
         print("중지")
