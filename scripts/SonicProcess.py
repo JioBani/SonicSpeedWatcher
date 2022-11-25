@@ -13,7 +13,7 @@ class Sonic():
         self.echo = echo
         self.triggerDistance = triggerDistance
         self.onOut = _onOut
-        self.setRun = False
+        self.setRun = True
 
     def measureDistance(self):
 
@@ -63,5 +63,5 @@ class Sonic():
         time.sleep(0.5)
 
     def start(self):
-      process = mp.Process(name="SubProcess", target=self.printDistance)
+      process = mp.Process(name="SubProcess", target=self.sonicLoop)
       process.start()
