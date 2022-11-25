@@ -59,7 +59,7 @@ class Sonic():
 
     def printDistance(self):
       while True :
-        print(self.measureDistance)
+        print(self.measureDistance())
         time.sleep(0.5)
 
     def start(self):
