@@ -8,16 +8,15 @@ def onOut(time) :
   print("나감 : %f" % time)
 
 def onPassEnter(time):
-  #exitSonic.startRun()
+  global passTime
   print("입장 시간 : %f" % time)
   passTime = time
-  pass
+  exitSonic.start()
 
 def onPassExit(time):
-  #exitSonic.stopRun()
   print("퇴장 시간 : %f" % time)
   print("걸린 시간 : %f" % (time - passTime))
-  pass
+  exitSonic.kill()
 
 # 전역 변수 선언 및 초기화
 
