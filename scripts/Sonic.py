@@ -59,7 +59,7 @@ class Sonic():
     def sonicSubLoop(self):
         while self.setRun :
             distance = self.measureDistance()
-            if(distance <self.measureDistance) :
+            if(distance < self.triggerDistance) :
                 self.onOut(time.time())
                 break
 
