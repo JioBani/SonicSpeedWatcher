@@ -38,6 +38,7 @@ class Sonic():
         isIn = False
         inTime = 0
         while self.setRun:
+            print(distance)
             distance = self.measureDistance()
             if(isIn) :
                 if(distance > self.triggerDistance) :
