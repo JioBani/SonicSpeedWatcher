@@ -87,7 +87,7 @@ gpioManager.setSonic()
 
 #sonic.start()
 
-sonic = NThreadSonic()
+sonic = NThreadSonic(GpioManager.enterTrigger , GpioManager.enterEcho , onOut)
 sonic.run()
 
 while True:
