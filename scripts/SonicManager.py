@@ -25,7 +25,7 @@ def onPassExit(time):
   print("걸린 시간 : %f" % (passTime))
   print("속도 : %f" % kmPerH)
   enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
-  enterSonic.start()
+  #enterSonic.start()
 
 # 전역 변수 선언 및 초기화
 
