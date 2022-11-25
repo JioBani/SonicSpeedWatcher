@@ -16,7 +16,7 @@ def onPassEnter(time):
 def onPassExit(time):
   #exitSonic.stopRun()
   print("퇴장 시간 : %f" % time)
-  print("걸린 시간 : %f" % time - passTime)
+  print("걸린 시간 : %f" % (time - passTime))
   pass
 
 # 전역 변수 선언 및 초기화
