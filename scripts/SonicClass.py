@@ -39,7 +39,6 @@ class Sonic:
         inTime = 0
         while self.run:
             distance = self.measureDistance()
-            print(distance)
             if(isIn) :
                 if(distance > self.triggerDistance) :
                     outTime =  time.time()
@@ -49,13 +48,11 @@ class Sonic:
                             transmitTime = outTime - inTime
                             if(transmitTime > 0.01) :
                                 self.onOut(transmitTime)
-                                print(transmitTime)
                                 isIn = False
                             break
 
             else:
                 if(distance < self.triggerDistance) :
-                    print("들어옴")
                     isIn = True
                     inTime = time.time()
 
