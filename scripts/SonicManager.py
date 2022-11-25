@@ -25,7 +25,7 @@ enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassE
 exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
 
 enterSonic.start()
-enterSonic.start()
+exitSonic.start()
 
 while True :
   input("멈추려면 아무키나 눌러주세요")
