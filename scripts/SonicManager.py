@@ -25,6 +25,3 @@ exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,
 enterSonic.onOut = onPassEnter
 
 enterSonic.startRun()
-
-while True:
-  if(enterSonic.run == False) : enterSonic.startRun()
