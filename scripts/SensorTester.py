@@ -9,8 +9,8 @@ gpioManager.init()
 
 class SonicThread(Thread):
   def __init__(self , trigger, echo):
-    self.daemon = True
     Thread.__init__(self)
+    self.daemon = True
     self.trigger = trigger
     self.echo = echo
     self.flag = True
