@@ -39,7 +39,6 @@ class Sonic:
         inTime = 0
         while self.run:
             distance = self.measureDistance()
-            print(distance)
             if(isIn) :
                 if(distance > self.triggerDistance) :
                     outTime =  time.time()
@@ -60,7 +59,7 @@ class Sonic:
 
     def startRun(self):
         print("작동중")
-        self.thread = Thread(target=self.sonicLoop ,daemon=True)
+        self.thread = Thread(target=self.sonicLoop)
         self.run = True
         self.thread.start()
 
