@@ -53,11 +53,16 @@ def loop(trigger , echo):
 #exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onOut)
 
 
+i = input("입력(1,2,3)")
+
 enterTh = Thread(target=loop(GpioManager.enterTrigger , GpioManager.enterEcho))
 exitTh = Thread(target=loop(GpioManager.exitTrigger ,GpioManager.exitEcho))
 
-enterTh.start()
-exitTh.start()
+if(i == 1) : enterTh.start()
+elif (i == 2) : exitTh.start()
+else :
+  enterTh.start()
+  exitTh.start()
 
 while True:
   pass
