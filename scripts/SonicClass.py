@@ -57,9 +57,11 @@ class Sonic:
                     inTime = time.time()
 
     def startRun(self):
+        print("작동중")
         self.thread = Thread(target=self.sonicLoop ,daemon=True)
         self.run = True
         self.thread.start()
 
     def stopRun(self):
+        print("중지")
         self.run = False
