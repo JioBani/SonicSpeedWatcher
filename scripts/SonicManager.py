@@ -6,12 +6,12 @@ def onOut(time) :
   print("나감 : %f" % time)
 
 def onPassEnter(time):
-  exitSonic.startRun()
+  #exitSonic.startRun()
   print("입장 시간 : %f" % time)
   pass
 
 def onPassExit(time):
-  exitSonic.stopRun()
+  #exitSonic.stopRun()
   print("퇴장 시간 : %f" % time)
   pass
 
@@ -25,5 +25,6 @@ exitSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,
 enterSonic.onOut = onPassEnter
 
 enterSonic.startRun()
+exitSonic.startRun()
 while True :
   input("멈추려면 아무키나 눌러주세요")
