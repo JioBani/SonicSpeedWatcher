@@ -10,3 +10,5 @@ def onOut(time):
 
 enterSonic = SonicClass.Sonic(GpioManager.exitTrigger,GpioManager.exitEcho, 1000 ,onOut)
 enterSonic.startRun()
+while True:
+  pass
