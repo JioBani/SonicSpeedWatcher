@@ -20,7 +20,7 @@ def onPassExit(endTime):
   global enterTime, exitSonic, enterSonic
   exitSonic.stop()
   passTime = endTime - enterTime
-  kmPerH = 100 / passTime / 1000 * 3.6
+  kmPerH = 200 / passTime / 1000 * 3.6
   print("퇴장 시간 : %f" % endTime)
   print("걸린 시간 : %f" % (passTime))
   print("속도 : %f" % kmPerH)
