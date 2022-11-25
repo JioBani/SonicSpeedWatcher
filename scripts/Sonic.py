@@ -42,6 +42,9 @@ class Sonic(Thread):
 def onOut(time):
     print("나옴")
 
+GpioManager.init()
+GpioManager.setSonic()
+
 sonic = Sonic(GpioManager.enterTrigger , GpioManager.enterEcho , onOut)
 
 sonic.start()
