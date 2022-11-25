@@ -56,13 +56,20 @@ class Sonic():
                     isIn = True
                     inTime = time.time()
 
+    def sonicSubLoop(self):
+        while self.setRun :
+            distance = self.measureDistance()
+            if(distance <self.measureDistance) :
+                self.onOut(time.time())
+                break
+
     def printDistance(self):
       while True :
         print(self.measureDistance())
         time.sleep(0.5)
 
     def start(self):
-      process = mp.Process(name="SubProcess", target=self.sonicLoop)
+      process = mp.Process(name="SubProcess", target=self.sonicSubLoop)
       process.start()
 
     def stop(self) :
