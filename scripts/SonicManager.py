@@ -10,16 +10,17 @@ def onOut(time) :
 
 def onPassEnter(time):
   global passTime
+  enterSonic.stop()
   print("입장 시간 : %f" % time)
   passTime = time
   exitSonic.start()
-  enterSonic.stop()
 
 def onPassExit(time):
+  exitSonic.stop()
   print("퇴장 시간 : %f" % time)
   print("걸린 시간 : %f" % (time - passTime))
   enterSonic.start()
-  exitSonic.stop()
+
 # 전역 변수 선언 및 초기화
 
 gpioManager = GpioManager()
