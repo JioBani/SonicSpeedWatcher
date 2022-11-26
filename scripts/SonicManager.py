@@ -78,6 +78,7 @@ def onPass(exitTime, passTime, velocity):
     print("평균 속도 : %f" % velocity)
 
 def killProcess(process : mp.Process):
+    print("gd")
     os.kill(process.pid,signal.SIGKILL)
 
 def run():
