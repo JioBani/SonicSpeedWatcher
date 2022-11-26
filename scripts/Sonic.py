@@ -4,6 +4,8 @@ from threading import Thread
 from threading import Event
 from GpioManager import GpioManager
 import multiprocessing as mp
+import signal
+import os
 
 class Sonic():
 
@@ -75,4 +77,4 @@ class Sonic():
 
     def stop(self) :
         self.setRun = False
-        self.process.terminate()
+        os.kill(self.process.pid, signal.SIGTERM)
