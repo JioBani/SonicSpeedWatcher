@@ -54,7 +54,7 @@ def onPassEnter(endTime):
         enterProcess.close()
     print("입장 시간 : %f" % endTime)
     enterTime = endTime
-    exitProcess = mp.Process(name="ExitProcess",target=exitLoop)
+    exitProcess = mp.Process(name="ExitProcess",target=exitLoop,daemon=True)
     exitProcess.start()
 
 def onPassExit(endTime):
@@ -66,7 +66,7 @@ def onPassExit(endTime):
     onPass(endTime , passTime , kmPerH)
 
     exitProcess.close()
-    enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
+    enterProcess = mp.Process(name="EnterProcess",target=enterLoop,daemon=True)
     enterProcess.start()
 
 def onPass(exitTime, passTime, velocity):
@@ -76,7 +76,7 @@ def onPass(exitTime, passTime, velocity):
 
 def run():
     global enterProcess
-    enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
+    enterProcess = mp.Process(name="EnterProcess",target=enterLoop,daemon=True)
     enterProcess.start()
     pass
 
