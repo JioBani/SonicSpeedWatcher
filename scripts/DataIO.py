@@ -24,4 +24,5 @@ class DataManager():
 
 dataManager = DataManager()
 passData = dataManager.readPassData()
-print(passData)
+for data in passData :
+    data.print()
