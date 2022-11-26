@@ -6,15 +6,15 @@ import os
 class SonicManager:
     def __init__(self):
         GpioManager.setSonic()
-        self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
-        self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
+        self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,self.onPassEnter)
+        self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,self.onPassExit)
         self.enterTime = 0
 
     def onPassEnter(self,endTime):
         self.enterSonic.stop()
         print("입장 시간 : %f" % endTime)
         self.enterTime = endTime
-        self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
+        self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,self.onPassExit)
         self.exitSonic.start()
 
     def onPassExit(self,endTime):
@@ -24,7 +24,7 @@ class SonicManager:
         print("퇴장 시간 : %f" % endTime)
         print("걸린 시간 : %f" % (passTime))
         print("속도 : %f" % kmPerH)
-        self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
+        self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,self.onPassEnter)
         self.enterSonic.start()
 
     def run(self):
