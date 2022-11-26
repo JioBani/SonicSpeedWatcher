@@ -18,10 +18,9 @@ def onPass(exitTime, passTime, velocity):
 
     path = getImagePath()
 
-    with picamera.PiCamera() as camera:
-        print("찰칵")
-        camera.capture(path)
-        camera.close()
+    camera = picamera.PiCamera()
+    camera.capture(path)
+    camera.close()
 
     passData = PassData(
         exitTime=exitTime,
