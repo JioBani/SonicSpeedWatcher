@@ -20,7 +20,7 @@ def onPass(exitTime, passTime, velocity):
     print("평균 속도 : %f" % velocity)
 
     path = getImagePath()
-
+    time.sleep(0.1)
     camera.capture(path)
     camera.close()
 
