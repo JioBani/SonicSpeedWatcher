@@ -19,7 +19,7 @@ class SonicManager:
 
     def onPassExit(self,endTime):
         self.exitSonic.stop()
-        passTime = endTime - enterTime
+        passTime = endTime - self.enterTime
         kmPerH = 200 / passTime / 1000 * 3.6
         print("퇴장 시간 : %f" % endTime)
         print("걸린 시간 : %f" % (passTime))
