@@ -17,6 +17,8 @@ def onPass(exitTime, passTime, velocity):
         pickle.dump(passData,file)
 
 
+print("시작")
+
 GpioManager.init()
 
 sonicManager = SonicManager()
