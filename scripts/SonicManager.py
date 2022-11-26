@@ -8,6 +8,7 @@ import os
 
 onEnter = None
 onExit = None
+onPass = None
 triggerDistance = 1000
 enterTime = 0
 
@@ -52,7 +53,7 @@ exitProcess = None
 def onPassEnter(endTime):
     global enterProcess, exitProcess, enterTime
     if(enterProcess != None):
-        enterProcess.kill()
+        enterProcess.close()
     print("입장 시간 : %f" % endTime)
     enterTime = endTime
     exitProcess = mp.Process(name="ExitProcess",target=exitLoop)
@@ -66,15 +67,11 @@ def onPassExit(endTime):
     kmPerH = 200 / passTime / 1000 * 3.6
     onPass(endTime , passTime , kmPerH)
 
-    exitProcess.kill()
+    exitProcess.close()
     killProcess(exitProcess)
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
 
-def onPass(exitTime, passTime, velocity):
-    print("퇴장 시각 : %f" % exitTime)
-    print("통과 시간 : %f" % passTime)
-    print("평균 속도 : %f" % velocity)
 
 def killProcess(process : mp.Process):
     print("gd")

@@ -22,6 +22,7 @@ print("시작")
 
 GpioManager.init()
 GpioManager.setSonic()
+SonicManager.onPass = onPass
 
 SonicManager.run()
 
