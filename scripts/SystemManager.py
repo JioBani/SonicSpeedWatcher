@@ -1,4 +1,4 @@
-from SonicManager import *
+import SonicManager
 from schema.PassData import *
 import pickle
 
@@ -20,7 +20,6 @@ def onPass(exitTime, passTime, velocity):
 print("시작")
 
 GpioManager.init()
+GpioManager.setSonic()
 
-sonicManager = SonicManager()
-sonicManager.setOnPass(onPass=onPass)
-sonicManager.run()
+SonicManager.run()

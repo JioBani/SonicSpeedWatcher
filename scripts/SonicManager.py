@@ -3,6 +3,88 @@ from Sonic import Sonic
 from GpioManager import GpioManager
 import signal
 import multiprocessing as mp
+import RPi.GPIO as GPIO
+
+onEnter = None
+onExit = None
+triggerDistance = 1000
+enterTime = 0
+
+def init(_onEnter,_onExit):
+    global onEnter, onExit
+    onEnter = _onEnter
+    onExit = _onExit
+
+def measureDistance(trigger,echo):
+
+    '''
+    물체의 거리를 mm 단위로 반환
+    '''
+
+    GPIO.output(trigger, True) # 신호 1 발생
+    GPIO.output(trigger, False) # 신호 0 발생(falling 에지)
+
+    while(GPIO.input(echo) == 0):
+        pass
+    pulse_start = time.time() # 신호 1. 초음파 발생이 시작되었음을 알림
+    while(GPIO.input(echo) == 1):
+        pass
+    pulse_end = time.time() # 신호 0. 초음파 수신 완료를 알림
+
+    pulse_duration = pulse_end - pulse_start
+    return 340*10000/2*pulse_duration
+
+def enterLoop():
+    while True :
+        distance = measureDistance(GpioManager.enterTrigger,GpioManager.enterEcho)
+        if(distance < triggerDistance) :
+            onPassEnter(time.time())
+            break
+
+def exitLoop():
+    while True :
+        distance = measureDistance(GpioManager.exitTrigger,GpioManager.exitEcho)
+        if(distance < triggerDistance) :
+            onPassExit(time.time())
+            break
+
+enterProcess = None
+#mp.Process(name="EnterProcess",target=enterLoop)
+exitProcess = None
+#mp.Process(name="ExitProcess",target=exitLoop)
+
+def onPassEnter(endTime):
+    global enterProcess, exitProcess, enterTime
+    if(enterProcess != None):
+        enterProcess.terminate()
+    print("입장 시간 : %f" % endTime)
+    enterTime = time
+    exitProcess = mp.Process(name="ExitProcess",target=exitLoop)
+    exitProcess.start()
+
+def onPassExit(endTime):
+    global enterProcess, exitProcess, enterTime
+
+    passTime = endTime - enterTime
+    kmPerH = 200 / passTime / 1000 * 3.6
+    onPass(endTime , passTime , kmPerH)
+
+    exitProcess.terminate()
+    enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
+    enterProcess.start()
+
+def onPass(exitTime, passTime, velocity):
+    print("퇴장 시각 : %f" % exitTime)
+    print("통과 시간 : %f" % passTime)
+    print("평균 속도 : %f" % velocity)
+
+def run():
+    global enterProcess
+    enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
+    enterProcess.start()
+    pass
+
+
 
 class SonicManager:
     def __init__(self):
