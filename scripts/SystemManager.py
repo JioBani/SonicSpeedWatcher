@@ -22,6 +22,7 @@ def onPass(exitTime, passTime, velocity):
     path = getImagePath()
 
     camera.capture(path)
+    camera.close()
 
     passData = PassData(
         exitTime=exitTime,
@@ -43,4 +44,4 @@ SonicManager.onPass = onPass
 SonicManager.run()
 
 input("종료하려면 아무 키나 입력")
-camera.close()
+
