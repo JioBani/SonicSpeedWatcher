@@ -15,7 +15,7 @@ def getImagePath():
 
 def capture(path):
     camera = picamera.PiCamera()
-    camera.capture(path)
+    camera.capture(path,use_video_port = True)
     camera.close()
 
 def onPass(exitTime, passTime, velocity):

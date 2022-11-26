@@ -23,8 +23,3 @@ class DataManager():
                 except EOFError :
                     file.close()
                     return data
-
-dataManager = DataManager()
-passData = dataManager.readPassData()
-for data in passData :
-    data.print()
