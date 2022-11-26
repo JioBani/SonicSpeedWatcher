@@ -53,7 +53,7 @@ def onPassEnter(endTime):
     if(enterProcess != None):
         enterProcess.close()
     print("입장 시간 : %f" % endTime)
-    enterTime = time
+    enterTime = endTime
     exitProcess = mp.Process(name="ExitProcess",target=exitLoop)
     exitProcess.start()
 
