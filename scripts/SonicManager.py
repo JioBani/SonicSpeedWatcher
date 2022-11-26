@@ -4,6 +4,7 @@ from GpioManager import GpioManager
 import signal
 import multiprocessing as mp
 import RPi.GPIO as GPIO
+import os
 
 onEnter = None
 onExit = None
@@ -51,6 +52,7 @@ exitProcess = None
 def onPassEnter(endTime):
     global enterProcess, exitProcess, enterTime
     if(enterProcess != None):
+        killProcess(enterProcess)
         enterProcess.close()
     print("입장 시간 : %f" % endTime)
     enterTime = endTime
@@ -66,6 +68,7 @@ def onPassExit(endTime):
     onPass(endTime , passTime , kmPerH)
 
     exitProcess.close()
+    killProcess(exitProcess)
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
 
@@ -73,6 +76,9 @@ def onPass(exitTime, passTime, velocity):
     print("퇴장 시각 : %f" % exitTime)
     print("통과 시간 : %f" % passTime)
     print("평균 속도 : %f" % velocity)
+
+def killProcess(process : mp.Process):
+    os.kill(process.pid,signal.SIGKILL)
 
 def run():
     global enterProcess
