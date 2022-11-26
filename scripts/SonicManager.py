@@ -23,7 +23,7 @@ class SonicManager:
 
         print("입장 시간 : %f" % endTime)
         self.enterTime = endTime
-        self.exitProcess = mp.Process(name="ExitProcess",target=self.exitProcess.sonicSubLoop)
+        self.exitProcess = mp.Process(name="ExitProcess",target=self.exitSonic.sonicSubLoop)
         self.exitProcess.start()
 
 #        self.enterSonic.stop()
