@@ -8,6 +8,7 @@ class DataManager():
     def saveData(self,path,data):
         with open(path,"ab") as file:
             pickle.dump(data,file)
+            file.close()
 
     def savePassData(self,passData):
         self.saveData(path=passDataPath,data=passData)
@@ -20,6 +21,7 @@ class DataManager():
                     passData = pickle.load(file)
                     data.append(passData)
                 except EOFError :
+                    file.close()
                     return data
 
 dataManager = DataManager()
