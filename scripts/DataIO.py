@@ -1,11 +1,22 @@
 import pickle
 import schema.PassData
 
-def readData():
-    with open("../static/data/passData.bin", 'rb') as file:    # james.p 파일을 바이너리 읽기 모드(rb)로 열기
-        passData = pickle.load(file)
-        print("퇴장 시각 : %f" % passData.exitTime)
-        print("통과 시간 : %f" % passData.passingTime)
-        print("평균 속도 : %f" % passData.velocity)
+passDataPath = "../static/data/passData.bin"
 
-readData()
+class DataManager():
+
+    def saveData(self,path,data):
+        with open(path,"ab") as file:
+            pickle.dump(data,file)
+
+    def savePassData(self,passData):
+        self.saveData(path=passDataPath,data=passData)
+
+    def readPassData(self):
+        with open("../static/data/passData.bin", 'rb') as file:    # james.p 파일을 바이너리 읽기 모드(rb)로 열기
+            passData = pickle.load(file)
+            return passData
+
+dataManager = DataManager()
+passData = dataManager.readPassData()
+print(passData)
