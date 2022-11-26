@@ -4,14 +4,19 @@ import pickle
 from GpioManager import *
 import time
 import picamera
+import multiprocessing as mp
 
 imagePath = "../static/images"
-camera = picamera.PiCamera()
 
 
 def getImagePath():
     global imagePath
     return "%s%f.jpg" % (imagePath,time.time())
+
+def capture(path):
+    camera = picamera.PiCamera()
+    camera.capture(path)
+    camera.close()
 
 def onPass(exitTime, passTime, velocity):
     global camera
@@ -20,9 +25,9 @@ def onPass(exitTime, passTime, velocity):
     print("평균 속도 : %f" % velocity)
 
     path = getImagePath()
-    time.sleep(0.1)
-    camera.capture(path)
-    camera.close()
+    cameraProcess = mp.Process(target=capture,args=(path))
+    cameraProcess.start()
+    cameraProcess.join()
 
     passData = PassData(
         exitTime=exitTime,
