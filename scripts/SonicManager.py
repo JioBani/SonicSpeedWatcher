@@ -51,7 +51,7 @@ exitProcess = None
 def onPassEnter(endTime):
     global enterProcess, exitProcess, enterTime
     if(enterProcess != None):
-        enterProcess.terminate()
+        enterProcess.close()
     print("입장 시간 : %f" % endTime)
     enterTime = time
     exitProcess = mp.Process(name="ExitProcess",target=exitLoop)
@@ -64,7 +64,7 @@ def onPassExit(endTime):
     kmPerH = 200 / passTime / 1000 * 3.6
     onPass(endTime , passTime , kmPerH)
 
-    exitProcess.terminate()
+    exitProcess.close()
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
 
