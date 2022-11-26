@@ -11,12 +11,16 @@ class SonicManager:
         self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,self.onPassExit)
         self.enterTime = 0
         self.onPass = None
-
         self.enterProcess = mp.Process(name="EnterProcess",target=self.enterSonic.sonicSubLoop)
         self.exitProcess = None
+        self.isFirst = True
 
     def onPassEnter(self,endTime) :
-        self.enterProcess.terminate()
+        if(self.isFirst == True) :
+            self.isFirst = False
+        else :
+            self.enterProcess.terminate()
+
         print("입장 시간 : %f" % endTime)
         self.enterTime = endTime
         self.exitProcess = mp.Process(name="ExitProcess",target=self.exitProcess.sonicSubLoop)
