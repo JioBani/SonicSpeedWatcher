@@ -33,8 +33,8 @@ class SonicManager:
 #        self.exitSonic.start()
 
     def onPassExit(self,endTime):
-        if(self.exitProcess.is_alive) :
-            self.exitProcess.terminate()
+        #if(self.exitProcess.is_alive) :
+         #   self.exitProcess.terminate()
         passTime = endTime - self.enterTime
         kmPerH = 200 / passTime / 1000 * 3.6
         self.onPass(endTime , passTime , kmPerH)
