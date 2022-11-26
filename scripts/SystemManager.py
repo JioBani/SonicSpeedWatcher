@@ -24,3 +24,5 @@ GpioManager.init()
 GpioManager.setSonic()
 
 SonicManager.run()
+
+input("종료하려면 아무 키나 입력")
