@@ -68,7 +68,6 @@ def onPassExit(endTime):
     onPass(endTime , passTime , kmPerH)
 
     exitProcess.close()
-    killProcess(exitProcess)
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
 
