@@ -25,7 +25,7 @@ def onPass(exitTime, passTime, velocity):
     print("평균 속도 : %f" % velocity)
 
     path = getImagePath()
-    cameraProcess = mp.Process(target=capture,args=(path))
+    cameraProcess = mp.Process(target=capture,args=(path,))
     cameraProcess.start()
     cameraProcess.join()
 
