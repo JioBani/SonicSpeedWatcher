@@ -9,7 +9,7 @@ imagePath = "../static/images"
 
 def getImagePath():
     global imagePath
-    return "%f%d.jpg" % (time ,imagePath )
+    return "%f%d.jpg" % (time.time() ,imagePath )
 
 def onPass(exitTime, passTime, velocity):
     print("퇴장 시각 : %f" % exitTime)
