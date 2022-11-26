@@ -12,7 +12,8 @@ class SonicManager:
         self.onPass = None
 
     def onPassEnter(self,endTime):
-        self.enterSonic.stop()
+        if(self.enterSonic.process != None) :
+            self.enterSonic.stop()
         print("입장 시간 : %f" % endTime)
         self.enterTime = endTime
         self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,self.onPassExit)
