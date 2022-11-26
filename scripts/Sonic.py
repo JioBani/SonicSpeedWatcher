@@ -9,12 +9,12 @@ import os
 
 class Sonic():
 
-    def __init__(self ,trigger , echo, triggerDistance):
+    def __init__(self ,trigger , echo, triggerDistance , _onOut):
         self.daemon = True
         self.trigger = trigger
         self.echo = echo
         self.triggerDistance = triggerDistance
-        self.onOut = None
+        self.onOut = _onOut
         self.setRun = True
         self.process = None
 
