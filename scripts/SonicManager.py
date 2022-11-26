@@ -60,6 +60,7 @@ def onPassEnter(endTime):
 def onPassExit(endTime):
     global enterProcess, exitProcess, enterTime
 
+    print(endTime,enterTime)
     passTime = endTime - enterTime
     kmPerH = 200 / passTime / 1000 * 3.6
     onPass(endTime , passTime , kmPerH)
