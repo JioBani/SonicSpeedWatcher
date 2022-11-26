@@ -75,4 +75,4 @@ class Sonic():
 
     def stop(self) :
         self.setRun = False
-        self.process.close()
+        self.process.terminate()
