@@ -12,6 +12,7 @@ class SonicManager:
         self.onPass = None
 
     def onPassEnter(self,endTime):
+        print(self.enterSonic.process)
         if(self.enterSonic.process != None) :
             self.enterSonic.stop()
         print("입장 시간 : %f" % endTime)
