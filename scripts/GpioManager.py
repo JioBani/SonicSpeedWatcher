@@ -6,14 +6,16 @@ class GpioManager:
     exitTrigger = 24
     exitEcho = 23
 
+
     def __init__(self) : None
 
-    def init(self):
+    @staticmethod
+    def init():
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
-        self.setSonic()
 
-    def setSonic(self):
+    @staticmethod
+    def setSonic():
         GPIO.setup(GpioManager.enterTrigger, GPIO.OUT)
         GPIO.setup(GpioManager.enterEcho, GPIO.IN)
         GPIO.setup(GpioManager.exitTrigger, GPIO.OUT)

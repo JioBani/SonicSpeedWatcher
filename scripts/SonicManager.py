@@ -5,8 +5,7 @@ import os
 
 class SonicManager:
     def __init__(self):
-        gpioManager = GpioManager()
-        gpioManager.init()
+        GpioManager.setSonic()
         self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,onPassEnter)
         self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,onPassExit)
         self.enterTime = 0
@@ -33,6 +32,10 @@ class SonicManager:
         while True :
             input("멈추려면 아무키나 눌러주세요")
 
+GpioManager.init()
+
+sonicManager = SonicManager()
+sonicManager.run()
 
 '''
 enterTime = 0
