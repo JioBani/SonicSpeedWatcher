@@ -10,11 +10,6 @@ onExit = None
 triggerDistance = 1000
 enterTime = 0
 
-def init(_onEnter,_onExit):
-    global onEnter, onExit
-    onEnter = _onEnter
-    onExit = _onExit
-
 def measureDistance(trigger,echo):
 
     '''

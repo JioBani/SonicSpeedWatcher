@@ -1,6 +1,7 @@
 import SonicManager
 from schema.PassData import *
 import pickle
+from GpioManager import *
 
 def onPass(exitTime, passTime, velocity):
     print("퇴장 시각 : %f" % exitTime)
