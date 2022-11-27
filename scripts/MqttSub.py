@@ -11,8 +11,7 @@ try:
     while True:
         pass
 except KeyboardInterrupt:
-
-
+    subMqtt.stop()
 
 
 
