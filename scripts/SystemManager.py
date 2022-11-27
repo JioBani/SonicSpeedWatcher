@@ -49,4 +49,4 @@ SonicManager.onPass = onPass
 SonicManager.run()
 
 input("종료하려면 아무 키나 입력")
-
+SonicManager.stop()

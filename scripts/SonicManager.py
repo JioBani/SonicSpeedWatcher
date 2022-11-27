@@ -71,17 +71,14 @@ def onPassExit(endTime):
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
 
-
-def killProcess(process : mp.Process):
-    print("gd")
-    os.kill(process.pid,signal.SIGKILL)
-
 def run():
     global enterProcess
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
-    pass
 
+def stop():
+    if(enterProcess.is_alive) : enterProcess.kill()
+    if(exitProcess.is_alive) : enterProcess.kill()
 
 
 class SonicManager:
