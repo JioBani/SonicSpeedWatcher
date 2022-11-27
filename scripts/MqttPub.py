@@ -6,5 +6,6 @@ pubMqtt = MqttClient("localhost")
 pubMqtt.run()
 
 while True :
-    time.sleep(1)
-    pubMqtt.publish(topic="test" , msg="test")
+    msg = input("메세지 입력")
+    if(msg == 'exit') : break
+    pubMqtt.publish(topic="test" , msg=msg)

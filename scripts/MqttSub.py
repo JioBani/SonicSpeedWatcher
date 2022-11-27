@@ -8,4 +8,5 @@ subMqtt = MqttClient("localhost",onMessage=onMessage)
 subMqtt.subscribe(topic="test")
 subMqtt.run()
 
-input("종료하려면 아무키나 입력하세요 >> ")
+while True:
+  pass
