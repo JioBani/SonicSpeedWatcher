@@ -5,7 +5,7 @@ class MqttClient:
     def __init__(self, ip, onMessage = None):
         self.ip = ip
         self.client = mqtt.Client()
-        self.onConnect = self.onConnect
+        self.client.on_connect = self.onConnect
         self.client.on_message = onMessage
 
     def onConnect(client, userData, flag, rc):
