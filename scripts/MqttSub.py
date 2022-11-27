@@ -8,7 +8,7 @@ try:
     subMqtt = MqttClient("localhost",onMessage=onMessage)
     subMqtt.subscribe(topic="test")
     subMqtt.run()
-    subMqtt.client.on_connect = onMessage
+    subMqtt.client.on_message = onMessage
     while True:
         pass
 except KeyboardInterrupt:
