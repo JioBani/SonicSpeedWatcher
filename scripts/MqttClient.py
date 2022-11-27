@@ -19,3 +19,7 @@ class MqttClient:
 
     def run(self):
         self.client.connect(self.ip , 1883)
+        self.client.loop_start()
+
+    def stop(self):
+        self.client.loop_stop()
