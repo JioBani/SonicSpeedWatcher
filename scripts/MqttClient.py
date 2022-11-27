@@ -1,14 +1,18 @@
 import paho.mqtt.client as mqtt
 
+def onConnect(client, userData, flag, rc):
+    print("Connect with result code:"+ str(rc))
+
+
 class MqttClient:
 
     def __init__(self, ip, onMessage = None):
         self.ip = ip
         self.client = mqtt.Client()
-        self.client.on_connect = self.onConnect
+        self.client.on_connect = onConnect
         self.client.on_message = onMessage
 
-    def onConnect(client, userData, flag, rc):
+    def onConnect(self,client, userData, flag, rc):
         print("Connect with result code:"+ str(rc))
 
     def subscribe(self,topic):
