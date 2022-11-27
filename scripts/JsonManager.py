@@ -7,6 +7,6 @@ def dictionaryToJson(dict):
 def passDataArrayToJson(arr):
   resultDict = {}
   for passData in arr:
-    dict = dictionaryToJson(dict)
+    dict = dictionaryToJson(passData)
     resultDict[dict['exitTime']] = dict
   return json.dumps(resultDict)
