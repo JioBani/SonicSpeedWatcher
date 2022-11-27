@@ -6,8 +6,8 @@ import time
 import picamera
 import multiprocessing as mp
 
-imagePath = "../static/images"
-
+imagePath = "../static/images/"
+speedingStd = 1
 
 def getImagePath():
     global imagePath
@@ -19,10 +19,13 @@ def capture(path):
     camera.close()
 
 def onPass(exitTime, passTime, velocity):
-    global camera
+    global camera, speedingStd
+    if(velocity > speedingStd) : isSpeeding = True
+    else : isSpeeding = False
     print("퇴장 시각 : %f" % exitTime)
     print("통과 시간 : %f" % passTime)
     print("평균 속도 : %f" % velocity)
+    print("과속" if isSpeeding else "정속")
 
     path = getImagePath()
     cameraProcess = mp.Process(target=capture,args=(path,))
@@ -33,7 +36,8 @@ def onPass(exitTime, passTime, velocity):
         exitTime=exitTime,
         passingTime=passTime,
         velocity=velocity,
-        imagePath=path
+        imagePath=path,
+        isSpeeding=isSpeeding
     )
 
     with open("../static/data/passData.bin","ab") as file:
