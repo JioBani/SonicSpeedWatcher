@@ -1,6 +1,10 @@
 from DataIO import *
+import JsonManager
 
 dataManager = DataManager()
-passData = dataManager.readPassData()
-for data in passData :
+passDataArr = dataManager.readPassData()
+
+jsonResult = JsonManager.passDataArrayToJson(passDataArr)
+print(jsonResult)
+for data in passDataArr :
     data.print()

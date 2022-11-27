@@ -19,3 +19,12 @@ class PassData:
     print("평균 속도 : %f" % self.velocity)
     print("이미지 : %s " % self.imagePath)
     print("과속 {0}".format(self.isSpeeding))
+
+  def getDict(self) :
+    dict = {}
+    dict['exitTime'] = self.exitTime
+    dict['passingTime'] = self.passingTime
+    dict['velocity'] = self.velocity
+    dict['imagePath'] = self.imagePath
+    dict['isSpeeding'] = self.isSpeeding
+    return dict
