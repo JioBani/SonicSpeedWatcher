@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 
 class MqttClient:
 
-    def __init__(self, ip, onMessage = None):
+    def __init__(self, ip,topic,onMessage = None, ):
         self.ip = ip
         self.client = mqtt.Client()
         self.client.on_connect = self.onConnect
