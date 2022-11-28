@@ -7,15 +7,15 @@ def index():
         return render_template('view_data.html')
 
 @app.route('/view_data')
-def index():
+def view_data():
         return render_template('view_data.html')
 
 @app.route('/setting')
-def index():
+def setting():
         return render_template('setting.html')
 
 @app.route('/view_with_image')
-def index():
+def view_with_image():
         return render_template('view_with_image.html')
 
 
