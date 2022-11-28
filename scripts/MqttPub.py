@@ -1,11 +1,20 @@
-from MqttClient import *
+# publisher
+
 import time
+import paho.mqtt.client as mqtt
 
-pubMqtt = MqttClient("localhost")
+ip = input("브로커의 IP 주소>>")
 
-pubMqtt.run()
+client = mqtt.Client()
+client.connect(ip, 1883)
+client.loop_start()
 
-while True :
-    msg = input("메세지 입력")
-    if(msg == 'exit') : break
-    pubMqtt.publish(topic="test" , msg=msg)
+count = 0
+while(True):
+        message = input("문자메시지>>")
+        if message == "exit" :
+             break
+        client.publish("letter", message, qos=0)
+        print("sending %s" % message)
+client.loop_stop()
+client.disconnect()
