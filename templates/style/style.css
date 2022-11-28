@@ -1,7 +1,9 @@
+
 body {
     margin: 0;
     width: 100vw;
     height: 100vh;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .sidebar{
@@ -57,4 +59,53 @@ body {
     font-size: 32px;
     font-weight: 700;
     margin-left: 5px;
+    margin-top: 10px;
+}
+
+.show_table{
+    margin-top: 5px;
+    font-size: 18px;
+    width: 100%;
+    border-collapse : collapse;
+    border-spacing : 0;
+}
+
+.show_table th{
+    text-align: left;
+    width: 10%;
+    border-bottom: 1px solid #222222;
+    height: 35px;
+}
+
+.show_table td{
+    border-bottom: 1px solid #222222;
+    height: 35px;
+}
+
+.enter_time{
+    padding-left: 10px;
+}
+
+.exit_time{
+
+}
+
+.passing_time{
+
+}
+
+.velocity{
+
+}
+
+.speeding{
+    width: 50px;
+}
+
+.show_table .show_image{
+    width: 5%;
+}
+
+.show_table .blank{
+    table-layout: fixed;
 }
