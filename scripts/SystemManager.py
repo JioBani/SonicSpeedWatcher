@@ -56,6 +56,10 @@ def onPass(enterTime, exitTime, passTime, velocity):
     savePath = "%s%f.jpg" % (imagePath,imageTime)
     sendPath = "%s%f.jpg" % (imageSendPath,imageTime)
 
+    if(isSpeeding) : pubString = '%f/과속' %(velocity)
+    else : pubString = '%f/정속' %(velocity)
+    mqttClient.publish(topic="velocity" , msg=pubString)
+
     path = getImagePath()
     cameraProcess = mp.Process(target=capture,args=(savePath,))
     cameraProcess.start()
@@ -81,9 +85,6 @@ def onPass(enterTime, exitTime, passTime, velocity):
         import traceback
         traceback.print_exc()
 
-    if(isSpeeding) : pubString = '%f/과속' %(velocity)
-    else : pubString = '%f/정속' %(velocity)
-    mqttClient.publish(topic="velocity" , msg=pubString)
     with open("../static/data/passData.bin","ab") as file:
         pickle.dump(passData,file)
 
