@@ -81,16 +81,10 @@ SonicManager.run()
 
 try:
     while(True):
-        a = input("입력")
-        if(a == "1") : greenLed.on()
-        elif (a == '2') : redLed.on()
-        elif (a == '3') :
-            greenLed.off()
-            redLed.off()
-#        if(time.time() - greenLedStart > ledTime):
-#           greenLed.off()
-#        if(time.time() - redLedStart > ledTime):
-#            redLed.off()
+        if(time.time() - greenLedStart > ledTime):
+           greenLed.off()
+        if(time.time() - redLedStart > ledTime):
+           redLed.off()
 finally:
     greenLed.off()
     redLed.off()
