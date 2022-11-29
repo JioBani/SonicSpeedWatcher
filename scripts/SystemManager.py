@@ -22,6 +22,18 @@ ledTime = 1
 greenLedStart = 0
 redLedStart = 0
 
+def onMessage(client, userdata, msg):
+  content = str(msg.payload.decode("utf-8"))
+  print(content)
+  if(content == 'request'):
+        message = dataManager.readByJson()
+        mqttClient.publish("json_response", message)
+        print("sending %s" % message)
+
+mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
+dataManager = DataManager()
+mqttClient.run()
+
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
 
@@ -85,19 +97,6 @@ GpioManager.setLed()
 
 SonicManager.onPass = onPass
 SonicManager.run()
-
-def onMessage(client, userdata, msg):
-  content = str(msg.payload.decode("utf-8"))
-  print(content)
-  if(content == 'request'):
-        message = dataManager.readByJson()
-        mqttClient.publish("json_response", message)
-        print("sending %s" % message)
-
-mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
-dataManager = DataManager()
-mqttClient.run()
-
 
 try:
     while True :
