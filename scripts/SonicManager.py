@@ -6,6 +6,7 @@ import multiprocessing as mp
 import RPi.GPIO as GPIO
 import os
 from MqttClient import MqttClient
+import traceback
 
 onEnter = None
 onExit = None
@@ -68,18 +69,22 @@ def onPassEnter(endTime):
     exitProcess.start()
 
 def onPassExit(endTime):
-    global enterProcess, exitProcess, enterTime
+    try:
+        global enterProcess, exitProcess, enterTime
 
-    print(endTime,enterTime)
-    passTime = endTime - enterTime
-    kmPerH = 200 / passTime / 1000 * 3.6
-    onPass(enterTime, endTime , passTime , kmPerH)
+        print(endTime,enterTime)
+        passTime = endTime - enterTime
+        kmPerH = 200 / passTime / 1000 * 3.6
+        onPass(enterTime, endTime , passTime , kmPerH)
 
-    exitProcess.close()
-    enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
-    enterProcess.start()
+        exitProcess.close()
+        enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
+        enterProcess.start()
 
-    mqttClient.publish(topic='velocity' , msg='kmPerH')
+        mqttClient.publish(topic='velocity' , msg='kmPerH')
+    except Exception:
+        err = traceback.format_exc()
+        print(str(err))
 
 def run():
     global enterProcess
