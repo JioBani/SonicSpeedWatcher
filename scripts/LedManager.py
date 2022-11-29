@@ -65,10 +65,9 @@ class Led:
 
 GpioManager.init()
 GpioManager.setLed()
-#ledManager = LedManager()
-#ledManager.start()
 
-def ledOnOff(led, onOff): # led 번호의 핀에 onOff(0/1) 값 출력하는 함수
+
+""" def ledOnOff(led, onOff): # led 번호의 핀에 onOff(0/1) 값 출력하는 함수
         GPIO.output(led, onOff)
 
 onOff = 1
@@ -76,12 +75,15 @@ for i in range(10):
         ledOnOff(GpioManager.greenLed, onOff) # led가 연결된  핀에 1또는 0의 디지털 값 출력
         time.sleep(1)
         onOff = 0 if onOff == 1 else 1 # 0과 1의 토글링
+ """
 
 
-"""
+ledManager = LedManager()
+ledManager.start()
+
 while True:
     a = input("1 : Green , 2 : Red , 3 : Off , 4 : exit")
     if(a == "1") : ledManager.onGreenLed()
     elif (a == '2') : ledManager.onRedLed()
     else : break
- """
+
