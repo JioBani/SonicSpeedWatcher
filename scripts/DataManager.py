@@ -1,6 +1,7 @@
 import pickle
 import schema.PassData
 import os
+import JsonManager
 
 passDataPath = "../static/data/passData.bin"
 
@@ -33,3 +34,7 @@ class DataManager():
         f = open(passDataPath,'w')
         f.close()
         print("초기화 완료")
+
+    def readByJson(self):
+        passDataArr = self.readPassData()
+        return JsonManager.passDataArrayToJson(passDataArr)

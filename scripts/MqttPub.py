@@ -1,5 +1,5 @@
 from MqttClient import *
-
+from DataManager import *
 
 """ # publisher
 
@@ -26,10 +26,12 @@ def onMessage(client, userdata, msg):
   print(str(msg.payload.decode("utf-8")))
 
 client = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
+dataManager = DataManager()
 client.run()
 
 while(True):
         message = input("문자메시지>>")
+        message = dataManager.readByJson()
         if message == "exit" :
              break
         client.publish("json_response", message)
