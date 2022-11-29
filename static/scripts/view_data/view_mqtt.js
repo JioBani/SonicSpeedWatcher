@@ -83,7 +83,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
   }
 
   // 도착한 메시지 출력
-  document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
+  //document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
   onGetData(stringToObjectArray(msg.payloadString));
 }
 
@@ -111,7 +111,15 @@ function stringToObjectArray(string){
             'isSpeeding' : json[key]['isSpeeding']
         }
         arr.push(passData)
-    });
+    })
+
+    arr.forEach((data)=>{
+        console.log(data['exitTime']);
+        console.log(data['passingTime']);
+        console.log(data['velocity']);
+        console.log(data['imagePath']);
+        console.log(data['isSpeeding']);
+    })
 
     return arr;
 }
