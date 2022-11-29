@@ -9,7 +9,6 @@ function onGetData(dataArr) {
 function getTableTime(passData) {
     var enterTime = new Date(Number(passData['enterTime']));
     var exitTime = new Date(Number(passData['exitTime']));
-    enterTime.getHours
     var result = '<tr>';
     result += `<td class="enter_time">${enterTime.toLocaleString('ko-kr')}</td>`;
     result += `<td>${exitTime.toLocaleString('ko-kr')}</td>`;
