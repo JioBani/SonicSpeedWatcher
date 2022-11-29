@@ -82,6 +82,7 @@ def onPassExit(endTime):
         enterProcess.start()
 
         mqttClient.publish(topic='velocity' , msg='kmPerH')
+        print("mqttClient.publish(topic='velocity' , msg='kmPerH')")
     except Exception:
         err = traceback.format_exc()
         raise print(str(err))
