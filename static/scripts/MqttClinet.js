@@ -24,7 +24,7 @@ class MqttClient{
         // 브로커에 접속. 매개변수는 객체 {onSuccess : onConnect}로서, 객체의 프로퍼틴느 onSuccess이고 그 값이 onConnect.
         // 접속에 성공하면 onConnect 함수를 실행하라는 지시
         this.client.connect({
-            onSuccess: onConnect,
+            onSuccess: this.onConnect,
         });
     }
 
