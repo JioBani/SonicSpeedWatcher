@@ -7,6 +7,7 @@ function onGetData(dataArr) {
 }
 
 function getTableTime(passData) {
+    //asd
     var enterTime = new Date(Math.floor(Number(passData['enterTime'] * 1000)));
     var exitTime = new Date(Math.floor(Number(passData['exitTime'] * 1000)));
     var result = '<tr>';
