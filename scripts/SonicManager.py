@@ -5,12 +5,20 @@ import signal
 import multiprocessing as mp
 import RPi.GPIO as GPIO
 import os
+from MqttClient import MqttClient
 
 onEnter = None
 onExit = None
 onPass = None
 triggerDistance = 1000
 enterTime = 0
+
+def onMessage(client, userdata, msg):
+    content = str(msg.payload.decode("utf-8"))
+    print(content)
+
+mqttClient = MqttClient(ip='localhost' , topic='velocity' , onMessage=onMessage)
+mqttClient.run()
 
 def measureDistance(trigger,echo):
 
@@ -70,6 +78,8 @@ def onPassExit(endTime):
     exitProcess.close()
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
+
+    mqttClient.publish(topic='velocity' , msg='kmPerH')
 
 def run():
     global enterProcess
