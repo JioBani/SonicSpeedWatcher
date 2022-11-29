@@ -72,9 +72,9 @@ def onPassExit(endTime , client):
     passTime = endTime - enterTime
     kmPerH = 200 / passTime / 1000 * 3.6
     if(kmPerH > overSpeedStd) :
-        client.publish('velocity' , kmPerH + '/과속')
+        client.publish('velocity' , str(kmPerH) + '/과속')
     else :
-        client.publish('velocity' , kmPerH + '/정속')
+        client.publish('velocity' , str(kmPerH) + '/정속')
 
     onPass(enterTime, endTime , passTime , kmPerH)
     exitProcess.close()
