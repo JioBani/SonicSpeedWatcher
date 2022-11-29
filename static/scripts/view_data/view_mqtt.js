@@ -132,7 +132,12 @@ function stringToObjectArray(string){
         result += "</tr>";
         console.log(result);
 
-        document.getElementById("show_table_body").innerHTML += result;
+        try{
+            document.getElementById("show_table_body").innerHTML += result;
+        }
+        catch(e){
+            console.log(e);
+        }
     })
 
     return arr;
