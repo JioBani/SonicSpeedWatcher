@@ -84,6 +84,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
   // 도착한 메시지 출력
   document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
   jsonString = msg.payloadString;
+  onGetData(stringToObjectArray(string));
 }
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
@@ -97,9 +98,9 @@ function requestData(){
     publish('json_request' , 'request');
 }
 
-function stringToObjectArray(){
-    console.log(jsonString);
-    json = JSON.parse(jsonString);
+function stringToObjectArray(string){
+    console.log(string);
+    json = JSON.parse(string);
     var arr = []
     Object.keys(json).forEach((key)=>{
         var passData = {
