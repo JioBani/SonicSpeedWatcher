@@ -14,7 +14,7 @@ def view_data():
 def setting():
         return render_template('setting.html')
 
-@app.route('/view_with_image')
+@app.route('/view_with_image' , methods=['GET', 'POST'])
 def view_with_image():
         return render_template('view_with_image.html')
 
