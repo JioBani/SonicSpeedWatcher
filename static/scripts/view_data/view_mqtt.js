@@ -111,15 +111,7 @@ function stringToObjectArray(string){
             'isSpeeding' : json[key]['isSpeeding']
         }
         arr.push(passData)
-    })
-
-    arr.forEach((data)=>{
-        console.log(data['exitTime']);
-        console.log(data['passingTime']);
-        console.log(data['velocity']);
-        console.log(data['imagePath']);
-        console.log(data['isSpeeding']);
-    })
+    });
 
     return arr;
 }
