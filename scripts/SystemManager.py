@@ -5,10 +5,18 @@ from GpioManager import *
 import time
 import picamera
 import multiprocessing as mp
+from Led import Led
 
 imagePath = "../static/images/"
 imageSendPath = "images/"
 speedingStd = 1
+
+greenLed = Led(GpioManager.greenLed)
+redLed = Led(GpioManager.redLed)
+
+ledTime = 1
+greenLedStart = 0
+redLedStart = 0
 
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
@@ -49,14 +57,32 @@ def onPass(enterTime, exitTime, passTime, velocity):
     with open("../static/data/passData.bin","ab") as file:
         pickle.dump(passData,file)
 
+    if(isSpeeding) :
+        redLedStart = time.time()
+        redLed.on()
+        pass
+    else:
+        greenLedStart = time.time()
+        greenLed.on()
+        pass
+
 
 print("시작")
 
 GpioManager.init()
 GpioManager.setSonic()
+GpioManager.setLed()
 SonicManager.onPass = onPass
 
 SonicManager.run()
 
-input("종료하려면 아무 키나 입력")
-SonicManager.stop()
+try:
+    while(True):
+        if(time.time() - greenLedStart > ledTime):
+            greenLed.off()
+        if(time.time() - redLedStart > ledTime):
+            redLed.off()
+finally:
+    greenLed.off()
+    redLed.off()
+    SonicManager.stop()
