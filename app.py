@@ -21,10 +21,11 @@ def view_with_image():
                 return render_template(
                         'view_with_image.html',
                         enterTime = request.form['enterTime'],
-                        enterTime = request.form['exitTime'],
-                        enterTime = request.form['passingTime'],
-                        enterTime = request.form['velocity'],
-                        enterTime = request.form['isSpeeding'],
+                        exitTime = request.form['exitTime'],
+                        passingTime = request.form['passingTime'],
+                        velocity = request.form['velocity'],
+                        imagePath = request.form['imagePath'],
+                        isSpeeding = request.form['isSpeeding']
                                        )
         else:
                 return render_template('view_with_image.html')
