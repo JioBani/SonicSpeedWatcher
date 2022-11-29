@@ -98,6 +98,7 @@ function requestData(){
 }
 
 function stringToObjectArray(){
+    console.log(jsonString);
     json = JSON.parse(jsonString);
     var arr = []
     Object.keys(json).forEach((key)=>{
