@@ -18,6 +18,7 @@ def setting():
 def view_with_image():
         if(request.method == 'POST'):
                 print(request.form['enterTime'])
+                isSpeeding =  request.form['isSpeeding'] if  '과속' else ''
                 return render_template(
                         'view_with_image.html',
                         enterTime = request.form['enterTime'],
@@ -25,7 +26,7 @@ def view_with_image():
                         passingTime = request.form['passingTime'],
                         velocity = request.form['velocity'],
                         imagePath = request.form['imagePath'],
-                        isSpeeding = request.form['isSpeeding']
+                        isSpeeding = isSpeeding
                                        )
         else:
                 return render_template('view_with_image.html')
