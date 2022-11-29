@@ -10,8 +10,8 @@ function getTableTime(passData) {
     var enterTime = new Date(Math.floor(Number(passData['enterTime'] * 1000)));
     var exitTime = new Date(Math.floor(Number(passData['exitTime'] * 1000)));
     var result = '<tr>';
-    result += `<td class="enter_time">${enterTime}</td>`;
-    result += `<td>${exitTime}</td>`;
+    result += `<td class="enter_time">${enterTime.toLocaleString('ko-KR')}</td>`;
+    result += `<td>${exitTime.toLocaleString('ko-KR')}</td>`;
     result += `<td>${passData['passingTime']}</td>`;
     result += `<td>${passData['velocity']}km/h</td>`;
     result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
