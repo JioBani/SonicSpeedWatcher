@@ -1,5 +1,5 @@
 var port = 9001 // mosquitto의 디폴트 웹 포트
-//var client = null; // null이면 연결되지 않았음
+var client = null; // null이면 연결되지 않았음
 var ip = "192.168.137.42";
 
 function startConnect() { // 접속을 시도하는 함수
@@ -10,7 +10,7 @@ function startConnect() { // 접속을 시도하는 함수
     //broker = "192.168.137.42";
     // id가 message인 DIV 객체에 브로커의 IP와 포트 번호 출력
     // MQTT 메시지 전송 기능을 모두 가징 Paho client 객체 생성
-    var client = new Paho.MQTT.Client(broker, Number(port), clientID);
+    client = new Paho.MQTT.Client(broker, Number(port), clientID);
 
     // client 객체에 콜백 함수 등록
     client.onConnectionLost = onConnectionLost; // 접속이 끊어졌을 때 실행되는 함수 등록
@@ -21,8 +21,6 @@ function startConnect() { // 접속을 시도하는 함수
     client.connect({
         onSuccess: onConnect,
     });
-
-    return client
 }
 
 var isConnected = false;
@@ -36,7 +34,7 @@ function onConnect() {
 
 var topicSave;
 
-function subscribe(client , topic) {
+function subscribe(topic) {
     if(client == null) return;
     if(isConnected != true) {
         topicSave = topic;
@@ -50,12 +48,12 @@ function subscribe(client , topic) {
     client.subscribe(topic); // 브로커에 subscribe
 }
 
-function publish(client ,topic, msg) {
+function publish(topic, msg) {
     if(client == null) return; // 연결되지 않았음
     client.send(topic, msg, 0, false);
 }
 
-function unsubscribe(client , topic) {
+function unsubscribe(topic) {
     if(client == null || isConnected != true) return;
 
     // 토픽으로 subscribe 하고 있음을 id가 message인 DIV에 출력
@@ -86,7 +84,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 }
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
-function startDisconnect(client) {
+function startDisconnect() {
   client.disconnect(); // 브로커에 접속 해제
   document.getElementById("messages").innerHTML += '<span>Disconnected</span><br/>';
 }

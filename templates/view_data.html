@@ -6,7 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-
+  <script src="../static/scripts/view_mqtt.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -110,6 +110,16 @@
           </tr>
         </tbody>
       </table>
+      <form>
+        <input type="button" onclick="startConnect()" value="Connect">
+        <input type="button" onclick="startDisconnect()" value="Disconnect">
+      </form>
+      <form id="subscribe-form">
+        <input type="button" onclick="subscribe('test')" value="액션">
+      </form>
+      <div id = "messages">
+
+      </div>
     </div>
   </div>
 </body>
