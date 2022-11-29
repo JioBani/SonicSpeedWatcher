@@ -2,6 +2,8 @@ var port = 9001 // mosquitto의 디폴트 웹 포트
 var client = null; // null이면 연결되지 않았음
 var ip = "192.168.137.42";
 
+var jsonString;
+
 function startConnect() { // 접속을 시도하는 함수
     clientID = "clientID-" + parseInt(Math.random() * 100); // 랜덤한 사용자 ID 생성
 
@@ -81,7 +83,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
   // 도착한 메시지 출력
   document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
-  stringToObjectArray(msg);
+  string = msg;
 }
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
@@ -95,8 +97,8 @@ function requestData(){
     publish('json_request' , 'request');
 }
 
-function stringToObjectArray(string){
-    json = JSON.parse(string);
+function stringToObjectArray(){
+    json = JSON.parse(jsonString);
     var arr = []
     Object.keys(json).forEach((key)=>{
         var passData = {
