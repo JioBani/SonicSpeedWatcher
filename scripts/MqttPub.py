@@ -23,8 +23,9 @@ client.loop_stop()
 client.disconnect()"""
 
 def onMessage(client, userdata, msg):
-  print(str(msg.payload.decode("utf-8")))
-  if(msg == 'request'):
+  content = str(msg.payload.decode("utf-8"))
+  print(content)
+  if(content == 'request'):
         message = dataManager.readByJson()
         mqttClient.publish("json_response", message)
         print("sending %s" % message)
