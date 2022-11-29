@@ -9,10 +9,10 @@ function onGetData(dataArr) {
 function getTableTime(passData) {
     var enterTime = new Date(Number(passData['enterTime']));
     var exitTime = new Date(Number(passData['exitTime']));
-
+    enterTime.getHours
     var result = '<tr>';
-    result += `<td class="enter_time">${enterTime}</td>`;
-    result += `<td>${exitTime}</td>`;
+    result += `<td class="enter_time">${enterTime.toLocaleString('ko-kr')}</td>`;
+    result += `<td>${exitTime.toLocaleString('ko-kr')}</td>`;
     result += `<td>${passData['passingTime']}</td>`;
     result += `<td>${passData['velocity']}km/h</td>`;
     result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
