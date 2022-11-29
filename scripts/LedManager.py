@@ -67,6 +67,8 @@ class Led:
     def loopStop(self):
         self.isRun = False
 
+GpioManager.init()
+GpioManager.setLed()
 ledManager = LedManager()
 ledManager.start()
 
