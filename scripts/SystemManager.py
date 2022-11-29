@@ -6,12 +6,13 @@ import time
 import picamera
 import multiprocessing as mp
 
-imagePath = "images/"
+imagePath = "../static/images/"
+imageSendPath = "images/"
 speedingStd = 1
 
 def getImagePath():
     global imagePath
-    return "%s%f.jpg" % (imagePath,time.time())
+    return "%s%f.jpg" % (imageSendPath,time.time())
 
 def capture(path):
     camera = picamera.PiCamera()
