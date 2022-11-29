@@ -1,0 +1,13 @@
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.content {
+  width: 800px;
+  height: 600px;
+  background-color: #44F934;
+}
