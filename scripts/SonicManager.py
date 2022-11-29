@@ -41,11 +41,15 @@ def enterLoop():
             break
 
 def exitLoop():
+    client = mqtt.Client()
+    client.connect('localhost', 1883)
+    client.loop_start()
     while True :
         distance = measureDistance(GpioManager.exitTrigger,GpioManager.exitEcho)
         if(distance < triggerDistance) :
-            onPassExit(time.time())
+            onPassExit(time.time() , client)
             break
+    client.loop_stop()
 
 enterProcess = None
 #mp.Process(name="EnterProcess",target=enterLoop)
@@ -61,23 +65,16 @@ def onPassEnter(endTime):
     exitProcess = mp.Process(name="ExitProcess",target=exitLoop)
     exitProcess.start()
 
-def onPassExit(endTime):
-    client = mqtt.Client()
-    client.connect('localhost', 1883)
-    client.loop_start()
-
+def onPassExit(endTime , client):
     global enterProcess, exitProcess, enterTime
-
-    print(endTime,enterTime)
     passTime = endTime - enterTime
     kmPerH = 200 / passTime / 1000 * 3.6
+    client.publish('velocity' , kmPerH)
     onPass(enterTime, endTime , passTime , kmPerH)
-
     exitProcess.close()
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
-    client.publish('velocity' , "fgd")
-    client.loop_stop()
+
 
 def run():
     global enterProcess
