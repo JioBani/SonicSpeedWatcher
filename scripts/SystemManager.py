@@ -21,6 +21,8 @@ ledTime = 1
 greenLedStart = 0
 redLedStart = 0
 
+mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
+
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
 
@@ -86,7 +88,6 @@ GpioManager.setLed()
 SonicManager.onPass = onPass
 SonicManager.run()
 
-mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
 mqttClient.run()
 
 try:
