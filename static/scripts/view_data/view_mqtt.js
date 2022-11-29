@@ -30,8 +30,7 @@ var isConnected = false;
 // 브로커로의 접속이 성공할 때 호출되는 함수
 function onConnect() {
     isConnected = true;
-
-    document.getElementById("messages").innerHTML += '<span>Connected</span><br/>';
+    console.log('Connected')
     requestData();
 }
 
@@ -46,8 +45,7 @@ function subscribe(topic) {
     }
 
     // 토픽으로 subscribe 하고 있음을 id가 message인 DIV에 출력
-    document.getElementById("messages").innerHTML += '<span>Subscribing to: ' + topic + '</span><br/>';
-
+    console.log('Subscribing to: ' + topic);
     client.subscribe(topic); // 브로커에 subscribe
 }
 
@@ -58,18 +56,17 @@ function publish(topic, msg) {
 
 function unsubscribe(topic) {
     if(client == null || isConnected != true) return;
-
     // 토픽으로 subscribe 하고 있음을 id가 message인 DIV에 출력
-    document.getElementById("messages").innerHTML += '<span>Unsubscribing to: ' + topic + '</span><br/>';
-
+    console.log('Unsubscribing to: ' + topic);
     client.unsubscribe(topic, null); // 브로커에 subscribe
 }
 
 // 접속이 끊어졌을 때 호출되는 함수
 function onConnectionLost(responseObject) { // 매개변수인 responseObject는 응답 패킷의 정보를 담은 개체
-    document.getElementById("messages").innerHTML += '<span>오류 : 접속 끊어짐</span><br/>';
+    console.log('오류 : 접속 끊어짐');
     if (responseObject.errorCode !== 0) {
-        document.getElementById("messages").innerHTML += '<span>오류 : ' + + responseObject.errorMessage + '</span><br/>';
+        console.log('<span>오류 : ' + + responseObject.errorMessage);
+        //document.getElementById("messages").innerHTML += '<span>오류 : ' + + responseObject.errorMessage + '</span><br/>';
     }
 }
 
@@ -89,8 +86,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
 function startDisconnect() {
-  client.disconnect(); // 브로커에 접속 해제
-  document.getElementById("messages").innerHTML += '<span>Disconnected</span><br/>';
+  console.log('Disconnected');
 }
 
 function requestData(){
