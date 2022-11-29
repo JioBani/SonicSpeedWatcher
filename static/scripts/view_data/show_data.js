@@ -7,9 +7,12 @@ function onGetData(dataArr) {
 }
 
 function getTableTime(passData) {
+    var enterTime = new Date(Number(passData['enterTime']));
+    var exitTime = new Date(Number(passData['exitTime']));
+
     var result = '<tr>';
-    result += `<td class="enter_time">${passData['enterTime']}</td>`;
-    result += `<td>${passData['exitTime']}</td>`;
+    result += `<td class="enter_time">${enterTime.getTime()}</td>`;
+    result += `<td>${exitTime.getTime()}</td>`;
     result += `<td>${passData['passingTime']}</td>`;
     result += `<td>${passData['velocity']}km/h</td>`;
     result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
