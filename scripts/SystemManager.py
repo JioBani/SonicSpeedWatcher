@@ -67,8 +67,8 @@ def onPass(enterTime, exitTime, passTime, velocity):
             greenLedStart = time.time()
             greenLed.on()
 
-        if(isSpeeding) : pubString = '%f/과속' %(velocity)
-        else : pubString = '%f/정속' %(velocity)
+        #if(isSpeeding) : pubString = '%f/과속' %(velocity)
+        #else : pubString = '%f/정속' %(velocity)
 
         #mqttClient.publish("velocity" , pubString)
 
