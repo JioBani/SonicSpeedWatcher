@@ -32,7 +32,7 @@ while(True):
         message = input("문자메시지>>")
         if message == "exit" :
              break
-        client.publish("test", message, qos=0)
+        client.publish("test", message)
         print("sending %s" % message)
 
 client.stop()
