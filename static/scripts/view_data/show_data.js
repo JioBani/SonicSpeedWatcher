@@ -7,8 +7,8 @@ function onGetData(dataArr) {
 }
 
 function getTableTime(passData) {
-    console.log(passData['enterTime']);
-    console.log(passData['exitTime']);
+    console.log(Math.floor(Number(passData['enterTime'])));
+    console.log(Math.floor(Number(passData['enterTime'])));
     var enterTime = new Date(Math.floor(Number(passData['enterTime'])));
     var exitTime = new Date(Math.floor(Number(passData['exitTime'])));
     var result = '<tr>';
