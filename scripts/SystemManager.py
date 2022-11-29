@@ -89,8 +89,9 @@ mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
 mqttClient.run()
 
 try:
-    input()
-    mqttClient.publish(topic="velocity" , msg="gd")
+    while True :
+        input()
+        mqttClient.publish(topic="velocity" , msg="gd")
 finally:
     greenLed.off()
     redLed.off()
