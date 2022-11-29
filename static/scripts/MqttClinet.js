@@ -5,7 +5,7 @@ var ip = "192.168.137.42";
 class MqttClient{
     constructor(){
         this.clientId = "clientID-" + parseInt(Math.random() * 100);
-        this.client = new Paho.MQTT.Client(broker, Number(port), this.clientID);
+        this.client = new Paho.MQTT.Client(ip, Number(port), this.clientID);
         this.isConnected = false;
         this.topic = "";
     }
