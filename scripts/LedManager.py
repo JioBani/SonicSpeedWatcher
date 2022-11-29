@@ -48,19 +48,15 @@ class Led:
             if(self.isOn) :
                 if(time.time() - self.startTime > self.onTime) :
                     self.off()
-                else:
-                    GPIO.output(self.ledNum , 1)
-                    #점등
-                    pass
-            else:
-                GPIO.output(self.ledNum , 0)
 
     def on(self):
         self.startTime = time.time()
         self.isOn = True
+        GPIO.output(self.ledNum , 1)
         pass
 
     def off(self):
+        GPIO.output(self.ledNum , 0)
         self.isOn = False
         pass
 
