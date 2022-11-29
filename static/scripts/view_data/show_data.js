@@ -5,6 +5,7 @@ function onGetData(dataArr) {
     var i = 0;
     dataArr.forEach((data)=>{
         document.getElementById("show_table_body").innerHTML += getTableTime(data,i);
+        i++;
     })
 
 }
