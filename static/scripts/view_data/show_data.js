@@ -11,8 +11,8 @@ function getTableTime(passData) {
     var exitTime = new Date(Number(passData['exitTime']));
 
     var result = '<tr>';
-    result += `<td class="enter_time">${enterTime.getTime()}</td>`;
-    result += `<td>${exitTime.getTime()}</td>`;
+    result += `<td class="enter_time">${enterTime}</td>`;
+    result += `<td>${exitTime}</td>`;
     result += `<td>${passData['passingTime']}</td>`;
     result += `<td>${passData['velocity']}km/h</td>`;
     result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
