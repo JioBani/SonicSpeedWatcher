@@ -89,7 +89,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
       document.getElementsByClassName('content').style.backgroundColor = '#44F934';
     }
     else {
-      document.getElementsByClassName('content').style.backgroundColor = '#F46639';
+      document.getElementById('content').style.backgroundColor = '#F46639';
     }
   } catch (error) {
     console.log(error);
