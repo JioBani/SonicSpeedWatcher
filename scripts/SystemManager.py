@@ -14,14 +14,14 @@ imagePath = "../static/images/"
 imageSendPath = "images/"
 speedingStd = 1
 
-greenLed = Led(GpioManager.greenLed)
-redLed = Led(GpioManager.redLed)
+#greenLed = Led(GpioManager.greenLed)
+#redLed = Led(GpioManager.redLed)
 
 ledTime = 1
 greenLedStart = 0
 redLedStart = 0
 
-mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
+#mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
 
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
@@ -84,16 +84,17 @@ print("시작")
 
 GpioManager.init()
 GpioManager.setSonic()
-GpioManager.setLed()
+#GpioManager.setLed()
 
 SonicManager.onPass = onPass
 SonicManager.run()
 
-mqttClient.run()
+#mqttClient.run()
+input()
 
-try:
-    input()
+""" try:
+    #input()
 finally:
     greenLed.off()
     redLed.off()
-    SonicManager.stop()
+    SonicManager.stop() """
