@@ -1,11 +1,12 @@
 var port = 9001 // mosquitto의 디폴트 웹 포트
 var client = null; // null이면 연결되지 않았음
+var ip = "192.168.137.42";
 
 function startConnect() { // 접속을 시도하는 함수
     clientID = "clientID-" + parseInt(Math.random() * 100); // 랜덤한 사용자 ID 생성
 
     // 사용자가 입력한 브로커의 IP 주소와 포트 번호 알아내기
-    broker = document.getElementById("broker").value; // 브로커의 IP 주소
+    broker = ip; // 브로커의 IP 주소
     //broker = "192.168.137.42";
     // id가 message인 DIV 객체에 브로커의 IP와 포트 번호 출력
     // MQTT 메시지 전송 기능을 모두 가징 Paho client 객체 생성
@@ -30,7 +31,9 @@ function onConnect() {
 
     document.getElementById("messages").innerHTML += '<span>Connected</span><br/>';
 }
+
 var topicSave;
+
 function subscribe(topic) {
     if(client == null) return;
     if(isConnected != true) {
