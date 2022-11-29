@@ -54,15 +54,20 @@ def onPass(enterTime, exitTime, passTime, velocity):
         isSpeeding=isSpeeding
     )
 
+    try:
+        if(isSpeeding) :
+            redLedStart = time.time()
+            redLed.on()
+        else:
+            greenLedStart = time.time()
+            greenLed.on()
+    except Exception:
+        import traceback
+        traceback.print_exc()
+
+
     with open("../static/data/passData.bin","ab") as file:
         pickle.dump(passData,file)
-
-    if(isSpeeding) :
-        redLedStart = time.time()
-        redLed.on()
-    else:
-        greenLedStart = time.time()
-        greenLed.on()
 
 
 print("시작")
