@@ -86,7 +86,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
     document.getElementById("velocity").innerHTML = Number(arr[0]).toFixed(2).toString() + "km/h";
     document.getElementById("speeding").innerHTML = arr[1] + "입니다."
     if (arr[1] == '정속') {
-      document.getElementsByClassName('content').style.backgroundColor = '#44F934';
+      document.getElementById('content').style.backgroundColor = '#44F934';
     }
     else {
       document.getElementById('content').style.backgroundColor = '#F46639';
