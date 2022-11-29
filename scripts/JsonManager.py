@@ -8,5 +8,5 @@ def passDataArrayToJson(arr):
     resultDict = {}
     for passData in arr:
         dict = passData.getDict()
-        resultDict[dict['exitTime']] = dict
+        resultDict[dict['enterTime']] = dict
     return json.dumps(resultDict)

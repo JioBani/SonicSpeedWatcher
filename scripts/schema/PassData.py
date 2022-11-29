@@ -1,12 +1,14 @@
 class PassData:
 
   def __init__(self ,
+               enterTime,
                exitTime,
                passingTime,
                velocity ,
                imagePath,
                isSpeeding
                ) :
+    self.enterTime = enterTime
     self.exitTime = exitTime
     self.passingTime = passingTime
     self.velocity = velocity
@@ -14,6 +16,7 @@ class PassData:
     self.isSpeeding = isSpeeding
 
   def print(self) :
+    print('진입 시각 : %f' % self.enterTime )
     print("퇴장 시각 : %f" % self.exitTime)
     print("통과 시간 : %f" % self.passingTime)
     print("평균 속도 : %f" % self.velocity)
@@ -22,6 +25,7 @@ class PassData:
 
   def getDict(self) :
     dict = {}
+    dict['enterTime'] = self.enterTime
     dict['exitTime'] = self.exitTime
     dict['passingTime'] = self.passingTime
     dict['velocity'] = self.velocity

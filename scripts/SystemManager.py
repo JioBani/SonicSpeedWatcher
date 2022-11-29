@@ -18,11 +18,12 @@ def capture(path):
     camera.capture(path,use_video_port = True)
     camera.close()
 
-def onPass(exitTime, passTime, velocity):
+def onPass(enterTime, exitTime, passTime, velocity):
     global camera, speedingStd
     if(velocity > speedingStd) : isSpeeding = True
     else : isSpeeding = False
-    print("퇴장 시각 : %f" % exitTime)
+    print("진입 시각 : %f" % enterTime)
+    print("진출 시각 : %f" % exitTime)
     print("통과 시간 : %f" % passTime)
     print("평균 속도 : %f" % velocity)
     print("과속" if isSpeeding else "정속")
@@ -33,6 +34,7 @@ def onPass(exitTime, passTime, velocity):
     cameraProcess.join()
 
     passData = PassData(
+        enterTime=enterTime,
         exitTime=exitTime,
         passingTime=passTime,
         velocity=velocity,

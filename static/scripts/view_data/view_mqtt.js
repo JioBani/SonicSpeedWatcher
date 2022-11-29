@@ -104,6 +104,7 @@ function stringToObjectArray(string){
     var arr = []
     Object.keys(json).forEach((key)=>{
         var passData = {
+            'enterTime' : json[key]['enterTime'],
             'exitTime' : json[key]['exitTime'],
             'passingTime' : json[key]['passingTime'],
             'velocity' : json[key]['velocity'],
@@ -114,6 +115,7 @@ function stringToObjectArray(string){
     })
 
     arr.forEach((data)=>{
+        console.log(data['enterTime']);
         console.log(data['exitTime']);
         console.log(data['passingTime']);
         console.log(data['velocity']);
