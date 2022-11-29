@@ -12,7 +12,7 @@ function getTableTime(passData) {
     result += `<td>${passData['exitTime']}</td>`;
     result += `<td>${passData['passingTime']}</td>`;
     result += `<td>${passData['velocity']}km/h</td>`;
-    result += `<td>${passData['isSpeeding'] == 'true' ? '과속' : '' }</td>`;
+    result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
     result += `<td></td>`;
     result += `<td style="text-align: center;">
                 <img class = "icon" src="../static/web_image/icon_image.svg".svg" width="25px" height="25px">
