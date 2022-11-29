@@ -5,6 +5,8 @@ class GpioManager:
     enterEcho = 5
     exitTrigger = 24
     exitEcho = 23
+    greenLed = 21
+    redLed = 20
 
 
     def __init__(self) : None
@@ -22,3 +24,7 @@ class GpioManager:
         GPIO.setup(GpioManager.exitEcho, GPIO.IN)
         GPIO.output(GpioManager.enterTrigger, False)
         GPIO.output(GpioManager.exitTrigger, False)
+
+    def setLed():
+        GPIO.setup(GpioManager.greenLed, GPIO.OUT)
+        GPIO.setup(GpioManager.redLed, GPIO.OUT)
