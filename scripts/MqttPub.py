@@ -24,17 +24,18 @@ client.disconnect()"""
 
 def onMessage(client, userdata, msg):
   print(str(msg.payload.decode("utf-8")))
+  if(msg == 'request'):
+        message = dataManager.readByJson()
+        mqttClient.publish("json_response", message)
+        print("sending %s" % message)
 
-client = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
+mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
 dataManager = DataManager()
-client.run()
+mqttClient.run()
 
 while(True):
         message = input("문자메시지>>")
-        message = dataManager.readByJson()
         if message == "exit" :
              break
-        client.publish("json_response", message)
-        print("sending %s" % message)
 
-client.stop()
+mqttClient.stop()
