@@ -48,6 +48,8 @@ class Led:
             if(self.isOn) :
                 if(time.time() - self.startTime > self.onTime) :
                     self.off()
+                else:
+                    print(time.time() - self.startTime)
 
     def on(self):
         self.startTime = time.time()
