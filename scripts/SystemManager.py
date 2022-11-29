@@ -43,9 +43,11 @@ def capture(path):
     camera.close()
 
 def onPass(enterTime, exitTime, passTime, velocity):
-    global camera, speedingStd
+    global camera, speedingStd, mqttClient
+
     if(velocity > speedingStd) : isSpeeding = True
     else : isSpeeding = False
+
     print("진입 시각 : %f" % enterTime)
     print("진출 시각 : %f" % exitTime)
     print("통과 시간 : %f" % passTime)
