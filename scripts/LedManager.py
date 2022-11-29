@@ -71,6 +71,7 @@ GpioManager.setLed()
 def ledOnOff(led, onOff): # led 번호의 핀에 onOff(0/1) 값 출력하는 함수
         GPIO.output(led, onOff)
 
+onOff = 1
 for i in range(10):
         ledOnOff(GpioManager.greenLed, onOff) # led가 연결된  핀에 1또는 0의 디지털 값 출력
         time.sleep(1)
