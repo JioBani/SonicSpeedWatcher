@@ -21,7 +21,9 @@ function getTableTime(passData , i) {
     result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
     result += `<td></td>`;
     result += `<td style="text-align: center;">
-                <img class = "icon" onclick="onClickShowImage(${i})" src="../static/web_image/icon_image.svg".svg" width="25px" height="25px">
+                <button type="button" onclick="onClickShowImage(${i})>
+                <img class = "icon" src="../static/web_image/icon_image.svg".svg" width="25px" height="25px">
+                </button>
                </td>`;
     result += "</tr>";
     return result;
