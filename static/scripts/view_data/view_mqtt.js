@@ -118,6 +118,8 @@ function stringToObjectArray(string){
         console.log(data['velocity']);
         console.log(data['imagePath']);
         console.log(data['isSpeeding']);
+
+        document.getElementById("show_table_body").innerHTML += getTableTime(data);
     })
 
     return arr;
