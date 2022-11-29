@@ -16,7 +16,11 @@ def setting():
 
 @app.route('/view_with_image' , methods=['GET', 'POST'])
 def view_with_image():
-        return render_template('view_with_image.html')
+        if(request.method == 'POST'):
+                print(request.form['enterTime'])
+                return render_template('view_with_image.html')
+        else:
+                return render_template('view_with_image.html')
 
 @app.route('/test')
 def test():
