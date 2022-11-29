@@ -13,6 +13,7 @@ onExit = None
 onPass = None
 triggerDistance = 1000
 enterTime = 0
+overSpeedStd = 1.5
 
 def measureDistance(trigger,echo):
 
@@ -67,9 +68,14 @@ def onPassEnter(endTime):
 
 def onPassExit(endTime , client):
     global enterProcess, exitProcess, enterTime
+
     passTime = endTime - enterTime
     kmPerH = 200 / passTime / 1000 * 3.6
-    client.publish('velocity' , kmPerH)
+    if(kmPerH > overSpeedStd) :
+        client.publish('velocity' , kmPerH + '/과속')
+    else :
+        client.publish('velocity' , kmPerH + '/정속')
+
     onPass(enterTime, endTime , passTime , kmPerH)
     exitProcess.close()
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
