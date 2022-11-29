@@ -79,8 +79,11 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
           drawImage(msg.payloadString); // 메시지에 담긴 파일 이름으로 drawImage() 호출. drawImage()는 face.js에 있음
   }
 
+  arr = msg.payloadString.split('/');
   // 도착한 메시지 출력
   document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
+  document.getElementById("velocity").innerHTML = arr[0]
+  document.getElementById("speeding").innerHTML = arr[1]
 }
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
