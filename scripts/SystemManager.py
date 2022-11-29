@@ -6,7 +6,7 @@ import time
 import picamera
 import multiprocessing as mp
 
-imagePath = "../static/images/"
+imagePath = "images/"
 speedingStd = 1
 
 def getImagePath():
