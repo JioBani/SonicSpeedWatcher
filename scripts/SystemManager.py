@@ -70,7 +70,7 @@ def onPass(enterTime, exitTime, passTime, velocity):
         if(isSpeeding) : pubString = '%f/과속' %(velocity)
         else : pubString = '%f/정속' %(velocity)
 
-        mqttClient.publish("velocity" , pubString)
+        #mqttClient.publish("velocity" , pubString)
 
     except Exception:
         import traceback
