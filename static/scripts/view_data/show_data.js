@@ -31,5 +31,17 @@ function getTableTime(passData , i) {
 }
 
 function onClickShowImage(index){
-    console.log(index);
+
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post'); //POST 메서드 적용
+    form.setAttribute('action', 'http://192.168.137.42:8080/view_with_image');	// 데이터를 전송할 url
+    for ( var key in params) {	// key, value로 이루어진 객체 params
+        var hiddenField = document.createElement('input');
+        hiddenField.setAttribute('type', 'hidden'); //값 입력
+        hiddenField.setAttribute('name', key);
+        hiddenField.setAttribute('value', passDataArr[index]['enterTime']);
+        form.appendChild(hiddenField);
+    }
+    document.body.appendChild(form);
+    form.submit();	// 전송~
 }
