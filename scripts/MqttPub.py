@@ -1,4 +1,7 @@
-# publisher
+from MqttClient import *
+
+
+""" # publisher
 
 import time
 import paho.mqtt.client as mqtt
@@ -17,4 +20,19 @@ while(True):
         client.publish("letter", message, qos=0)
         print("sending %s" % message)
 client.loop_stop()
-client.disconnect()
+client.disconnect()"""
+
+def onMessage(client, userdata, msg):
+  print(str(msg.payload.decode("utf-8")))
+
+client = MqttClient(ip="localhost" , topic="test" ,onMessage=onMessage)
+client.run()
+
+while(True):
+        message = input("문자메시지>>")
+        if message == "exit" :
+             break
+        client.publish("test", message, qos=0)
+        print("sending %s" % message)
+
+client.stop()

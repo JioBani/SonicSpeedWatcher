@@ -1,5 +1,7 @@
 # subscriber
+from MqttClient import *
 
+"""
 import paho.mqtt.client as mqtt
 
 def on_A(client, userdata, flag, rc):
@@ -18,3 +20,12 @@ client.on_message = on_B
 client.connect(ip, 1883)
 
 client.loop_forever()
+"""
+
+def onMessage(client, userdata, msg):
+  print(str(msg.payload.decode("utf-8")))
+
+client = MqttClient(ip="localhost" , topic="test" ,onMessage=onMessage)
+client.run()
+
+input("종료하려면 입력")
