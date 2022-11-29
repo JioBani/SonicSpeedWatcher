@@ -8,6 +8,7 @@ import multiprocessing as mp
 from Led import Led
 from threading import Thread
 from MqttClient import MqttClient
+from DataManager import DataManager
 
 
 imagePath = "../static/images/"
@@ -85,6 +86,19 @@ GpioManager.setLed()
 SonicManager.onPass = onPass
 SonicManager.run()
 
+def onMessage(client, userdata, msg):
+  content = str(msg.payload.decode("utf-8"))
+  print(content)
+  if(content == 'request'):
+        message = dataManager.readByJson()
+        mqttClient.publish("json_response", message)
+        print("sending %s" % message)
+
+mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
+dataManager = DataManager()
+mqttClient.run()
+
+
 try:
     while True :
         a = input()
@@ -92,3 +106,4 @@ finally:
     greenLed.off()
     redLed.off()
     SonicManager.stop()
+    mqttClient.stop()
