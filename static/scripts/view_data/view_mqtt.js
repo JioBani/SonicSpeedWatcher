@@ -95,32 +95,37 @@ function requestData(){
 }
 
 function stringToObjectArray(string){
-    console.log(string);
-    json = JSON.parse(string);
-    var arr = []
-    Object.keys(json).forEach((key)=>{
-        var enterTime = new Date(Math.floor(Number(json[key]['enterTime'] * 1000)));
-        var exitTime = new Date(Math.floor(Number(json[key]['exitTime'] * 1000)));
+    try {
+        console.log(string);
+        json = JSON.parse(string);
+        var arr = []
+        Object.keys(json).forEach((key)=>{
+            var enterTime = new Date(Math.floor(Number(json[key]['enterTime'] * 1000)));
+            var exitTime = new Date(Math.floor(Number(json[key]['exitTime'] * 1000)));
 
-        var passData = {
-            'enterTime' : enterTime.toLocaleString('ko-KR'),
-            'exitTime' : exitTime.toLocaleString('ko-KR'),
-            'passingTime' : json[key]['passingTime'].toFixed(2),
-            'velocity' : json[key]['velocity'].toFixed(1),
-            'imagePath' : json[key]['imagePath'],
-            'isSpeeding' : json[key]['isSpeeding']
-        }
-        arr.push(passData)
-    })
+            var passData = {
+                'enterTime' : enterTime.toLocaleString('ko-KR'),
+                'exitTime' : exitTime.toLocaleString('ko-KR'),
+                'passingTime' : json[key]['passingTime'].toFixed(2),
+                'velocity' : json[key]['velocity'].toFixed(1),
+                'imagePath' : json[key]['imagePath'],
+                'isSpeeding' : json[key]['isSpeeding']
+            }
+            arr.push(passData)
+        })
 
-    arr.forEach((data)=>{
-        console.log(data['enterTime']);
-        console.log(data['exitTime']);
-        console.log(data['passingTime']);
-        console.log(data['velocity']);
-        console.log(data['imagePath']);
-        console.log(data['isSpeeding']);
-    })
+        arr.forEach((data)=>{
+            console.log(data['enterTime']);
+            console.log(data['exitTime']);
+            console.log(data['passingTime']);
+            console.log(data['velocity']);
+            console.log(data['imagePath']);
+            console.log(data['isSpeeding']);
+        })
+        return arr;
 
-    return arr;
+    } catch (error) {
+        console.log(error)
+    }
+
 }
