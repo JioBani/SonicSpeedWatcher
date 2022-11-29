@@ -81,9 +81,15 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
   arr = msg.payloadString.split('/');
   // 도착한 메시지 출력
-  document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
-  document.getElementById("velocity").innerHTML = Number(arr[0]).toFixed(2)
-  document.getElementById("speeding").innerHTML = arr[1]
+  //document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
+  document.getElementById("velocity").innerHTML = Number(arr[0]).toFixed(2).toString() + "km/h";
+  document.getElementById("speeding").innerHTML = arr[1] + "입니다."
+  if(arr[1] == '정속'){
+    document.getElementsByClassName('content').style.backgroundColor = '#44F934';
+  }
+  else{
+    document.getElementsByClassName('content').style.backgroundColor = '#F46639';
+  }
 }
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
