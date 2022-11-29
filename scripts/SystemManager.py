@@ -21,11 +21,11 @@ ledTime = 1
 greenLedStart = 0
 redLedStart = 0
 
-mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=onMessage)
-
 def onMessage(client, userdata, msg):
     content = str(msg.payload.decode("utf-8"))
     print(content)
+
+mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=onMessage)
 
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
