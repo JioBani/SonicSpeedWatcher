@@ -11,8 +11,7 @@ imageSendPath = "images/"
 speedingStd = 1
 
 def getImagePath():
-    global imagePath
-    return "%s%f.jpg" % (imageSendPath,time.time())
+    return "%s%f.jpg" % (imagePath,time.time())
 
 def capture(path):
     camera = picamera.PiCamera()
@@ -29,8 +28,12 @@ def onPass(enterTime, exitTime, passTime, velocity):
     print("평균 속도 : %f" % velocity)
     print("과속" if isSpeeding else "정속")
 
+    imageTime = time.time()
+    savePath = "%s%f.jpg" % (imagePath,imageTime)
+    sendPath = "%s%f.jpg" % (imageSendPath,imageTime)
+
     path = getImagePath()
-    cameraProcess = mp.Process(target=capture,args=(path,))
+    cameraProcess = mp.Process(target=capture,args=(savePath,))
     cameraProcess.start()
     cameraProcess.join()
 
@@ -39,7 +42,7 @@ def onPass(enterTime, exitTime, passTime, velocity):
         exitTime=exitTime,
         passingTime=passTime,
         velocity=velocity,
-        imagePath=path,
+        imagePath=sendPath,
         isSpeeding=isSpeeding
     )
 
