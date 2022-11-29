@@ -12,13 +12,13 @@ function onGetData(dataArr) {
 
 function getTableTime(passData , i) {
     //asd
-    var enterTime = new Date(Math.floor(Number(passData['enterTime'] * 1000)));
-    var exitTime = new Date(Math.floor(Number(passData['exitTime'] * 1000)));
+    //var enterTime = new Date(Math.floor(Number(passData['enterTime'] * 1000)));
+    //var exitTime = new Date(Math.floor(Number(passData['exitTime'] * 1000)));
     var result = `<tr id = ${i}>`;
-    result += `<td class="enter_time">${enterTime.toLocaleString('ko-KR')}</td>`;
-    result += `<td>${exitTime.toLocaleString('ko-KR')}</td>`;
-    result += `<td>${passData['passingTime'].toFixed(2)}</td>`;
-    result += `<td>${passData['velocity'].toFixed(1)}km/h</td>`;
+    result += `<td class="enter_time">${enterTime}</td>`;
+    result += `<td>${exitTime}</td>`;
+    result += `<td>${passData['passingTime']}</td>`;
+    result += `<td>${passData['velocity']}km/h</td>`;
     result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
     result += `<td></td>`;
     result += `<td style="text-align: center;">

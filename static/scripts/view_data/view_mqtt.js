@@ -99,11 +99,14 @@ function stringToObjectArray(string){
     json = JSON.parse(string);
     var arr = []
     Object.keys(json).forEach((key)=>{
+        var enterTime = new Date(Math.floor(Number(json[key]['enterTime'] * 1000)));
+        var exitTime = new Date(Math.floor(Number(json[key]['exitTime'] * 1000)));
+
         var passData = {
-            'enterTime' : json[key]['enterTime'],
-            'exitTime' : json[key]['exitTime'],
-            'passingTime' : json[key]['passingTime'],
-            'velocity' : json[key]['velocity'],
+            'enterTime' : enterTime.toLocaleString('ko-KR'),
+            'exitTime' : exitTime.toLocaleString('ko-KR'),
+            'passingTime' : json[key]['passingTime'].toFixed(2),
+            'velocity' : json[key]['velocity'].toFixed(1),
             'imagePath' : json[key]['imagePath'],
             'isSpeeding' : json[key]['isSpeeding']
         }
