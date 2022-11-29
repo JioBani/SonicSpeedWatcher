@@ -81,7 +81,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
   // 도착한 메시지 출력
   document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
-
+  stringToObjectArray(msg);
 }
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
