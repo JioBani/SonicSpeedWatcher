@@ -7,6 +7,7 @@ function onGetData(dataArr) {
 }
 
 function getTableTime(passData) {
+    //asdsadsad
     console.log(Math.floor(Number(passData['enterTime'])));
     console.log(Math.floor(Number(passData['enterTime'])));
     var enterTime = new Date(Math.floor(Number(passData['enterTime'])));
