@@ -119,7 +119,19 @@ function stringToObjectArray(string){
         console.log(data['imagePath']);
         console.log(data['isSpeeding']);
 
-        document.getElementById("show_table_body").innerHTML += getTableTime(data);
+        var result = '<tr>';
+        result += `<td class="enter_time">${data['exitTime']}</td>`;
+        result += `<td>${data['exitTime']}</td>`;
+        result += `<td>${data['passingTime']}</td>`;
+        result += `<td>${data['velocity']}km/h</td>`;
+        result += `<td>${data['isSpeeding'] == 'true' ? '과속' : '' }</td>`;
+        result += `<td></td>`;
+        result += `<td style="text-align: center;">
+                    <img class = "icon" src="../static/web_image/icon_image.svg".svg" width="25px" height="25px">
+                   </td>`;
+        result += "</tr>";
+
+        document.getElementById("show_table_body").innerHTML += result;
     })
 
     return arr;
