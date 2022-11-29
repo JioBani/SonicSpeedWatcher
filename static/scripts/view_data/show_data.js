@@ -8,7 +8,7 @@ function onGetData(dataArr) {
 
 function getTableTime(passData) {
     var result = '<tr>';
-    result += `<td class="enter_time">${passData['exitTime']}</td>`;
+    result += `<td class="enter_time">${passData['enterTime']}</td>`;
     result += `<td>${passData['exitTime']}</td>`;
     result += `<td>${passData['passingTime']}</td>`;
     result += `<td>${passData['velocity']}km/h</td>`;
