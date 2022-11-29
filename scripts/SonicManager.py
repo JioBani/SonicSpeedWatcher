@@ -14,11 +14,6 @@ onPass = None
 triggerDistance = 1000
 enterTime = 0
 
-client = mqtt.Client()
-client.connect('localhost', 1883)
-client.loop_start()
-
-
 def measureDistance(trigger,echo):
 
     '''
@@ -67,21 +62,22 @@ def onPassEnter(endTime):
     exitProcess.start()
 
 def onPassExit(endTime):
-    try:
-        global enterProcess, exitProcess, enterTime
+    client = mqtt.Client()
+    client.connect('localhost', 1883)
+    client.loop_start()
 
-        print(endTime,enterTime)
-        passTime = endTime - enterTime
-        kmPerH = 200 / passTime / 1000 * 3.6
-        onPass(enterTime, endTime , passTime , kmPerH)
+    global enterProcess, exitProcess, enterTime
 
-        exitProcess.close()
-        enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
-        enterProcess.start()
-        client.publish('velocity' , "fgd")
-    except Exception:
-        err = traceback.format_exc()
-        print(str(err))
+    print(endTime,enterTime)
+    passTime = endTime - enterTime
+    kmPerH = 200 / passTime / 1000 * 3.6
+    onPass(enterTime, endTime , passTime , kmPerH)
+
+    exitProcess.close()
+    enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
+    enterProcess.start()
+    client.publish('velocity' , "fgd")
+    client.loop_stop()
 
 def run():
     global enterProcess
