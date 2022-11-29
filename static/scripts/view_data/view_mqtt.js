@@ -118,26 +118,6 @@ function stringToObjectArray(string){
         console.log(data['velocity']);
         console.log(data['imagePath']);
         console.log(data['isSpeeding']);
-
-        var result = '<tr>';
-        result += `<td class="enter_time">${data['exitTime']}</td>`;
-        result += `<td>${data['exitTime']}</td>`;
-        result += `<td>${data['passingTime']}</td>`;
-        result += `<td>${data['velocity']}km/h</td>`;
-        result += `<td>과속</td>`;
-        result += `<td></td>`;
-        result += `<td style="text-align: center;">
-                    <img class = "icon" src="../static/web_image/icon_image.svg".svg" width="25px" height="25px">
-                   </td>`;
-        result += "</tr>";
-        console.log(result);
-
-        try{
-            document.getElementById("show_table_body").innerHTML += result;
-        }
-        catch(e){
-            console.log(e);
-        }
     })
 
     return arr;
