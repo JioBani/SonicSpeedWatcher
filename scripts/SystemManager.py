@@ -43,7 +43,7 @@ def capture(path):
     camera.close()
 
 def onPass(enterTime, exitTime, passTime, velocity):
-    global camera, speedingStd, mqttClient
+    global camera, speedingStd
 
     if(velocity > speedingStd) : isSpeeding = True
     else : isSpeeding = False
@@ -60,7 +60,7 @@ def onPass(enterTime, exitTime, passTime, velocity):
 
     if(isSpeeding) : pubString = '%f/과속' %(velocity)
     else : pubString = '%f/정속' %(velocity)
-    mqttClient.publish(topic="velocity" , msg=pubString)
+    #mqttClient.publish(topic="velocity" , msg=pubString)
 
     path = getImagePath()
     cameraProcess = mp.Process(target=capture,args=(savePath,))
