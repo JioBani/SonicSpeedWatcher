@@ -21,11 +21,11 @@ ledTime = 1
 greenLedStart = 0
 redLedStart = 0
 
+mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=onMessage)
+
 def onMessage(client, userdata, msg):
     content = str(msg.payload.decode("utf-8"))
     print(content)
-
-mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=onMessage)
 
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
@@ -34,6 +34,11 @@ def capture(path):
     camera = picamera.PiCamera()
     camera.capture(path,use_video_port = True)
     camera.close()
+
+def pub(str):
+    print("전송")
+    mqttClient.publish("velocity" , str)
+
 
 def onPass(enterTime, exitTime, passTime, velocity):
     global camera, speedingStd
@@ -77,9 +82,11 @@ def onPass(enterTime, exitTime, passTime, velocity):
     if(isSpeeding) : pubString = '%f/과속' %(velocity)
     else : pubString = '%f/정속' %(velocity)
 
-    mqttClient.publish("velocity" , pubString)
+    pub(pubString)
+
     with open("../static/data/passData.bin","ab") as file:
         pickle.dump(passData,file)
+
 
 
 print("시작")
