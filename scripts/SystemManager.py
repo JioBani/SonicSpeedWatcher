@@ -6,6 +6,9 @@ import time
 import picamera
 import multiprocessing as mp
 from Led import Led
+from threading import Thread
+from MqttClient import MqttClient
+
 
 imagePath = "../static/images/"
 imageSendPath = "images/"
@@ -65,6 +68,10 @@ def onPass(enterTime, exitTime, passTime, velocity):
         import traceback
         traceback.print_exc()
 
+    if(isSpeeding) : pubString = '%f/과속' %(velocity)
+    else : pubString = '%f/정속' %(velocity)
+
+    mqttClient.publish("velocity" , pubString)
 
     with open("../static/data/passData.bin","ab") as file:
         pickle.dump(passData,file)
@@ -75,9 +82,12 @@ print("시작")
 GpioManager.init()
 GpioManager.setSonic()
 GpioManager.setLed()
-SonicManager.onPass = onPass
 
+SonicManager.onPass = onPass
 SonicManager.run()
+
+mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
+mqttClient.run()
 
 try:
     input()
