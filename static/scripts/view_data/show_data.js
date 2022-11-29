@@ -37,7 +37,7 @@ function onClickShowImage(index){
     form.setAttribute('action', 'http://192.168.137.42:8080/view_with_image');	// 데이터를 전송할 url
     var hiddenField = document.createElement('input');
     hiddenField.setAttribute('type', 'hidden'); //값 입력
-    hiddenField.setAttribute('name', key);
+    hiddenField.setAttribute('name', 'enterTime');
     hiddenField.setAttribute('value', passDataArr[index]['enterTime']);
     form.appendChild(hiddenField);
     document.body.appendChild(form);
