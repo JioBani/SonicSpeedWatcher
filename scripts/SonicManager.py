@@ -6,7 +6,7 @@ import multiprocessing as mp
 import RPi.GPIO as GPIO
 import os
 import traceback
-from MqttClient import MqttClient
+import paho.mqtt.client as mqtt
 
 onEnter = None
 onExit = None
@@ -14,20 +14,10 @@ onPass = None
 triggerDistance = 1000
 enterTime = 0
 
-def onMessage(client, userdata, msg):
-  content = str(msg.payload.decode("utf-8"))
-  print(content)
-  if(content == 'request'):
-        message = dataManager.readByJson()
-        mqttClient.publish("json_response", message)
-        print("sending %s" % message)
+client = mqtt.Client()
+client.connect('localhost', 1883)
+client.loop_start()
 
-mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
-mqttClient.run()
-
-def onMessage(client, userdata, msg):
-    content = str(msg.payload.decode("utf-8"))
-    print(content)
 
 def measureDistance(trigger,echo):
 
@@ -88,7 +78,7 @@ def onPassExit(endTime):
         exitProcess.close()
         enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
         enterProcess.start()
-        mqttClient.publish(topic='velocity' , msg='ho')
+        client.publish('velocity' , "fgd")
     except Exception:
         err = traceback.format_exc()
         print(str(err))
