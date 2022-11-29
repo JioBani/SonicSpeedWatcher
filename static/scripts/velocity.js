@@ -82,7 +82,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
   arr = msg.payloadString.split('/');
   // 도착한 메시지 출력
   document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
-  document.getElementById("velocity").innerHTML = arr[0]
+  document.getElementById("velocity").innerHTML = Number(arr[0]).toFixed(2)
   document.getElementById("speeding").innerHTML = arr[1]
 }
 
