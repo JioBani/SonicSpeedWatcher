@@ -14,14 +14,12 @@ imagePath = "../static/images/"
 imageSendPath = "images/"
 speedingStd = 1
 
-#greenLed = Led(GpioManager.greenLed)
-#redLed = Led(GpioManager.redLed)
+greenLed = Led(GpioManager.greenLed)
+redLed = Led(GpioManager.redLed)
 
 ledTime = 1
 greenLedStart = 0
 redLedStart = 0
-
-#mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
 
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
@@ -59,42 +57,41 @@ def onPass(enterTime, exitTime, passTime, velocity):
         isSpeeding=isSpeeding
     )
 
-    with open("../static/data/passData.bin","ab") as file:
-        pickle.dump(passData,file)
-
-"""     try:
+    try:
         if(isSpeeding) :
             redLedStart = time.time()
             redLed.on()
         else:
             greenLedStart = time.time()
             greenLed.on()
-
-        if(isSpeeding) : pubString = '%f/과속' %(velocity)
-        else : pubString = '%f/정속' %(velocity)
-
-        mqttClient.publish("velocity" , pubString)
-
     except Exception:
         import traceback
-        traceback.print_exc() """
+        traceback.print_exc()
+
+    if(isSpeeding) : pubString = '%f/과속' %(velocity)
+    else : pubString = '%f/정속' %(velocity)
+
+    mqttClient.publish("velocity" , pubString)
+    with open("../static/data/passData.bin","ab") as file:
+        pickle.dump(passData,file)
 
 
 print("시작")
 
 GpioManager.init()
 GpioManager.setSonic()
-#GpioManager.setLed()
+GpioManager.setLed()
 
 SonicManager.onPass = onPass
 SonicManager.run()
 
-#mqttClient.run()
-input()
+mqttClient = MqttClient(ip="localhost" , topic="velocity" , onMessage=None)
+mqttClient.run()
 
-""" try:
-    #input()
+try:
+    input()
+    mqttClient.publish(topic="velocity" , msg="gd")
 finally:
     greenLed.off()
     redLed.off()
-    SonicManager.stop() """
+    SonicManager.stop()
