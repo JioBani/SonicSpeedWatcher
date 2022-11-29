@@ -59,7 +59,10 @@ def onPass(enterTime, exitTime, passTime, velocity):
         isSpeeding=isSpeeding
     )
 
-    try:
+    with open("../static/data/passData.bin","ab") as file:
+        pickle.dump(passData,file)
+
+"""     try:
         if(isSpeeding) :
             redLedStart = time.time()
             redLed.on()
@@ -67,17 +70,14 @@ def onPass(enterTime, exitTime, passTime, velocity):
             greenLedStart = time.time()
             greenLed.on()
 
-        #if(isSpeeding) : pubString = '%f/과속' %(velocity)
-        #else : pubString = '%f/정속' %(velocity)
+        if(isSpeeding) : pubString = '%f/과속' %(velocity)
+        else : pubString = '%f/정속' %(velocity)
 
-        #mqttClient.publish("velocity" , pubString)
+        mqttClient.publish("velocity" , pubString)
 
     except Exception:
         import traceback
-        traceback.print_exc()
-
-    with open("../static/data/passData.bin","ab") as file:
-        pickle.dump(passData,file)
+        traceback.print_exc() """
 
 
 print("시작")
