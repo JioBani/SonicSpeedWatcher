@@ -60,11 +60,9 @@ def onPass(enterTime, exitTime, passTime, velocity):
     if(isSpeeding) :
         redLedStart = time.time()
         redLed.on()
-        pass
     else:
         greenLedStart = time.time()
         greenLed.on()
-        pass
 
 
 print("시작")
@@ -78,10 +76,16 @@ SonicManager.run()
 
 try:
     while(True):
-        if(time.time() - greenLedStart > ledTime):
+        a = input("입력")
+        if(a == "1") : greenLed.on()
+        elif (a == '2') : redLed.on()
+        elif (a == '3') :
             greenLed.off()
-        if(time.time() - redLedStart > ledTime):
             redLed.off()
+#        if(time.time() - greenLedStart > ledTime):
+#           greenLed.off()
+#        if(time.time() - redLedStart > ledTime):
+#            redLed.off()
 finally:
     greenLed.off()
     redLed.off()
