@@ -32,6 +32,7 @@ function onConnect() {
     isConnected = true;
 
     document.getElementById("messages").innerHTML += '<span>Connected</span><br/>';
+    requestData();
 }
 
 var topicSave;
