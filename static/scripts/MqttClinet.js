@@ -5,7 +5,7 @@ var ip = "192.168.137.42";
 class MqttClient{
     constructor(){
         this.clientId = "clientID-" + parseInt(Math.random() * 100);
-        this.client = new Paho.MQTT.Client(broker, Number(port), clientID);
+        this.client = new Paho.MQTT.Client(broker, Number(port), this.clientID);
         this.isConnected = false;
         this.topic = "";
     }
@@ -17,8 +17,8 @@ class MqttClient{
 
     startConnect() { // 접속을 시도하는 함수
         // client 객체에 콜백 함수 등록
-        this.client.onConnectionLost = onConnectionLost; // 접속이 끊어졌을 때 실행되는 함수 등록
-        this.client.onMessageArrived = onMessageArrived; // 메시지가 도착하였을 때 실행되는 함수 등록
+        this.client.onConnectionLost = this.onConnectionLost; // 접속이 끊어졌을 때 실행되는 함수 등록
+        this.client.onMessageArrived = this.onMessageArrived; // 메시지가 도착하였을 때 실행되는 함수 등록
 
         // 브로커에 접속. 매개변수는 객체 {onSuccess : onConnect}로서, 객체의 프로퍼틴느 onSuccess이고 그 값이 onConnect.
         // 접속에 성공하면 onConnect 함수를 실행하라는 지시
