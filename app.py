@@ -18,7 +18,14 @@ def setting():
 def view_with_image():
         if(request.method == 'POST'):
                 print(request.form['enterTime'])
-                return render_template('view_with_image.html')
+                return render_template(
+                        'view_with_image.html',
+                        enterTime = request.form['enterTime'],
+                        enterTime = request.form['exitTime'],
+                        enterTime = request.form['passingTime'],
+                        enterTime = request.form['velocity'],
+                        enterTime = request.form['isSpeeding'],
+                                       )
         else:
                 return render_template('view_with_image.html')
 
