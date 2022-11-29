@@ -89,3 +89,7 @@ function startDisconnect() {
   document.getElementById("messages").innerHTML += '<span>Disconnected</span><br/>';
 }
 
+function requestData(){
+    subscribe('json_response');
+    publish('json_request' , 'request');
+}

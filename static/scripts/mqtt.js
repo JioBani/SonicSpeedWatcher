@@ -88,4 +88,3 @@ function startDisconnect() {
   client.disconnect(); // 브로커에 접속 해제
   document.getElementById("messages").innerHTML += '<span>Disconnected</span><br/>';
 }
-
