@@ -4,7 +4,7 @@ var ip = "192.168.137.42";
 
 var jsonString;
 var dataArr;
-var chartArr;
+var chartArr = Array();
 
 function startConnect() { // 접속을 시도하는 함수
     clientID = "clientID-" + parseInt(Math.random() * 100); // 랜덤한 사용자 ID 생성
