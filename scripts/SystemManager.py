@@ -88,10 +88,12 @@ def onPass(enterTime, exitTime, passTime, velocity):
     )
 
     try:
-        if(isSpeeding) :
+        if(not isSpeeding) :
             greenLedStart.value = time.time()
+            greenLed.on()
         else:
             redLedStart.value = time.time()
+            redLed.on()
     except Exception:
         import traceback
         traceback.print_exc()
@@ -113,10 +115,10 @@ SonicManager.run()
 try:
     while True :
         if(time.time() - greenLedStart.value > 2) :
-            print(greenLedStart)
+            #print(greenLedStart)
             greenLed.off()
         if(time.time() - redLedStart.value > 2) :
-            print(redLedStart)
+            #print(redLedStart)
             redLed.off()
         time.sleep(0.1)
 finally:
