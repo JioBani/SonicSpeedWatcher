@@ -98,11 +98,12 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
     dataArr.forEach((data)=>{
       var i = Math.floor((endTime - data['enterTime']) / 60000);
-      chartArr[i]++;
+      if(i < 20)
+        chartArr[i]++;
     })
 
     for(var i = 0; i<20; i++){
-      addChartData(chartArr[i]);
+      addChartData(chartArr[i].reverse());
     }
 
 
