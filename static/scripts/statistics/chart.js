@@ -78,5 +78,3 @@ function hideshow() { // 캔버스 보이기 숨기기
 	else canvas.style.display = "none"
 }
 
-window.addEventListener("load", drawChart); // load 이벤트가 발생하면 drawChart() 호출하도록 등록
-
