@@ -15,7 +15,7 @@ processManager = mp.Manager()
 
 imagePath = "../static/images/"
 imageSendPath = "images/"
-speedingStd = 1
+speedingStd = 1.5
 
 greenLed = Led(GpioManager.greenLed)
 redLed = Led(GpioManager.redLed)
