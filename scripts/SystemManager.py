@@ -19,7 +19,7 @@ speedingStd = 1
 greenLed = Led(GpioManager.greenLed)
 redLed = Led(GpioManager.redLed)
 
-ledTime = 1
+ledTime = 2
 greenLedStart = processManager.Value(typecode='d' , value=0)
 redLedStart = processManager.Value(typecode='d' , value=0)
 
@@ -104,10 +104,10 @@ SonicManager.run()
 
 try:
     while True :
-        if(time.time() - greenLedStart.value > 2) :
+        if(time.time() - greenLedStart.value > ledTime) :
             #print(greenLedStart)
             greenLed.off()
-        if(time.time() - redLedStart.value > 2) :
+        if(time.time() - redLedStart.value > ledTime) :
             #print(redLedStart)
             redLed.off()
         time.sleep(0.1)
