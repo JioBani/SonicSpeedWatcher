@@ -40,8 +40,8 @@ def velocity():
         return render_template('velocity.html')
 
 @app.route('/statistics')
-def test():
-        return render_template('test.html')
+def statistics():
+        return render_template('statistics.html')
 
 @app.route('/test')
 def test():
