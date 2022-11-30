@@ -52,7 +52,12 @@ function init(enterTime) {
 
 
   for(let i=19; i>=0; i--) {
-		chart.data.labels[i] = enterTime;
+    var date = new Date(enterTime);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+    const timeStr = hours + '시' + minutes + '분';
+		chart.data.labels[i] = timeStr;
     enterTime = enterTime - 60000;
 	}
 
