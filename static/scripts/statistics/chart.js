@@ -34,11 +34,11 @@ var config = {
 		scales: { /* x축과 y축 정보 */
 			xAxes: [{
 				display: true,
-				scaleLabel: { display: true, labelString: '시간' },
+				scaleLabel: { display: true, labelString: '시각' },
 			}],
 			yAxes: [{
 				display: true,
-				scaleLabel: { display: true, labelString: '거리(cm)' }
+				scaleLabel: { display: true, labelString: '차량(대)' }
 			}]
 		}
 	}
