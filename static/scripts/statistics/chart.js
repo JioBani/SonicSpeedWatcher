@@ -43,15 +43,18 @@ var tick = 0; // 도착한 데이터의 개수임, tick의 범위는 0에서 99�
 function drawChart() {
 	ctx = document.getElementById('canvas').getContext('2d');
 	chart = new Chart(ctx, config);
-	init();
+	//init();
 } // end of drawChart()
 
 
 // chart의 차트에 labels의 크기를 LABEL_SIZE로 만들고 0~19까지 레이블 붙이기
-function init() {
-	for(let i=0; i<LABEL_SIZE; i++) {
-		chart.data.labels[i] = i;
+function init(labelArr) {
+
+
+  for(let i=0; i<labelArr.length; i++) {
+		chart.data.labels[i] = labelArr[i].enterTime;
 	}
+
 	chart.update();
 }
 

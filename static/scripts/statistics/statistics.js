@@ -3,6 +3,8 @@ var client = null; // null이면 연결되지 않았음
 var ip = "192.168.137.42";
 
 var jsonString;
+var dataArr;
+var chartArr;
 
 function startConnect() { // 접속을 시도하는 함수
     clientID = "clientID-" + parseInt(Math.random() * 100); // 랜덤한 사용자 ID 생성
@@ -84,9 +86,22 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
     //document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
     dataArr = stringToObjectArray(msg.payloadString);
 
+    drawChart();
+
+    var endTime = dataArr[dataArr.length - 1]['enterTime'];
+
+    for(var i = 0; i<20; i++){
+      chartArr.push({enterTime : 0});
+      endTime = endTime - 60000;
+    }
+
+    init(chartArr);
+
     dataArr.forEach((data)=>{
       addChartData(data['velocity']);
     })
+
+
   } catch (error) {
     console.log(error);
   }
@@ -109,12 +124,12 @@ function stringToObjectArray(string){
         json = JSON.parse(string);
         var arr = []
         Object.keys(json).forEach((key)=>{
-            var enterTime = new Date(Math.floor(Number(json[key]['enterTime'] * 1000)));
-            var exitTime = new Date(Math.floor(Number(json[key]['exitTime'] * 1000)));
+            var enterTime = Math.floor(Number(json[key]['enterTime'] * 1000));
+            var exitTime = Math.floor(Number(json[key]['exitTime'] * 1000));
 
             var passData = {
-                'enterTime' : enterTime.toLocaleString('ko-KR'),
-                'exitTime' : exitTime.toLocaleString('ko-KR'),
+                'enterTime' : enterTime,
+                'exitTime' : exitTime,
                 'passingTime' : json[key]['passingTime'].toFixed(2),
                 'velocity' : json[key]['velocity'].toFixed(1),
                 'imagePath' : json[key]['imagePath'],
