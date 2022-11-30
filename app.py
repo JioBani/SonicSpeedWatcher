@@ -39,6 +39,10 @@ def view_with_image():
 def velocity():
         return render_template('velocity.html')
 
+@app.route('/statistics')
+def test():
+        return render_template('test.html')
+
 @app.route('/test')
 def test():
         return render_template('test.html')
