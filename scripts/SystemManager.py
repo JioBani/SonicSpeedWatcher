@@ -41,8 +41,8 @@ def getImagePath():
 
 def capture(path):
     camera = picamera.PiCamera()
+    camera.resolution = (480,640)
     camera.capture(path,use_video_port = True)
-    camera.resolution(480,640)
     camera.close()
 
 def onPass(enterTime, exitTime, passTime, velocity):
