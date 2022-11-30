@@ -102,8 +102,9 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
         chartArr[i]++;
     })
 
+    chartArr.reverse()
     for(var i = 0; i<20; i++){
-      addChartData(chartArr[i].reverse());
+      addChartData(chartArr[i]);
     }
 
 
