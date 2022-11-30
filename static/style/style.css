@@ -111,3 +111,7 @@ body {
 .show_table .blank{
     table-layout: fixed;
 }
+
+.td_speeding{
+    color: red;
+}

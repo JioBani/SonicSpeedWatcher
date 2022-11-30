@@ -19,7 +19,7 @@ function getTableTime(passData , i) {
     result += `<td>${passData['exitTime']}</td>`;
     result += `<td>${passData['passingTime']}</td>`;
     result += `<td>${passData['velocity']}km/h</td>`;
-    result += `<td>${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
+    result += `<td style="color : red">${passData['isSpeeding'] == true ? '과속' : '' }</td>`;
     result += `<td></td>`;
     result += `<td style="text-align: center;">
                 <button type="button" onclick="onClickShowImage(${i})">
