@@ -72,20 +72,25 @@ function onConnectionLost(responseObject) { // 매개변수인 responseObject는
 
 // 메시지가 도착할 때 호출되는 함수
 function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지를 담고 있는 객체
-  console.log("onMessageArrived: " + msg.payloadString);
+  try {
+    console.log("onMessageArrived: " + msg.payloadString);
 
-  // 토픽 image가 도착하면 payload에 담긴 파일 이름의 이미지 그리기
-  if(msg.destinationName == "image") {
-          drawImage(msg.payloadString); // 메시지에 담긴 파일 이름으로 drawImage() 호출. drawImage()는 face.js에 있음
+    // 토픽 image가 도착하면 payload에 담긴 파일 이름의 이미지 그리기
+    if(msg.destinationName == "image") {
+            drawImage(msg.payloadString); // 메시지에 담긴 파일 이름으로 drawImage() 호출. drawImage()는 face.js에 있음
+    }
+
+    // 도착한 메시지 출력
+    //document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
+    dataArr = stringToObjectArray(msg.payloadString);
+
+    dataArr.forEach((data)=>{
+      addChartData(data['velocity']);
+    })
+  } catch (error) {
+    print(error);
   }
 
-  // 도착한 메시지 출력
-  //document.getElementById("messages").innerHTML += '<span>토픽 : ' + msg.destinationName + '  | ' + msg.payloadString + '</span><br/>';
-  dataArr = stringToObjectArray(msg.payloadString);
-
-	dataArr.forEach((data)=>{
-    addChartData(data['velocity']);
-	})
 }
 
 // disconnection 버튼이 선택되었을 때 호출되는 함수
