@@ -4,7 +4,7 @@ var ip = "192.168.137.42";
 
 var jsonString;
 var dataArr;
-var chartArr = Array();
+var chartArr = Array(20);
 
 function startConnect() { // 접속을 시도하는 함수
     clientID = "clientID-" + parseInt(Math.random() * 100); // 랜덤한 사용자 ID 생성
@@ -91,15 +91,19 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
     var endTime = dataArr[dataArr.length - 1]['enterTime'];
 
     for(var i = 0; i<20; i++){
-      chartArr.push({enterTime : 0});
-      endTime = endTime - 60000;
+      chartArr[i] = 0;
     }
 
     init(chartArr);
 
     dataArr.forEach((data)=>{
-      addChartData(data['velocity']);
+      var i = Math.floor(endTime - data['enterTime'] / 60000);
+      chartArr[i]++;
     })
+
+    for(var i = 0; i<20; i++){
+      addChartData(chartArr[i]);
+    }
 
 
   } catch (error) {
