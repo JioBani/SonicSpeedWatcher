@@ -35,10 +35,12 @@ dataManager = DataManager()
 mqttClient.run()
 
 def greenLedOn():
+    global greenLedStart
     greenLed.on()
     greenLedStart = time.time()
 
 def redLedOn():
+    global redLedStart
     redLed.on()
     redLedStart = time.time()
 
@@ -109,9 +111,9 @@ SonicManager.run()
 
 try:
     while True :
-        if(time.time() - greenLedStart> 1) :
+        if(time.time() - greenLedStart > 2) :
             greenLed.off()
-        if(time.time() - redLedStart > 1) :
+        if(time.time() - redLedStart > 2) :
             redLed.off()
         time.sleep(0.1)
 finally:
