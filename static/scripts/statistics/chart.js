@@ -10,13 +10,22 @@ var config = {
 
 		// datasets 배열로 이 차트에 그려질 모든 데이터 셋 표현. 아래는 그래프 1개만 있는 경우
 		datasets: [{
-			label: '실시간 데이터 흐름',
+			label: '전체 차량',
 			backgroundColor: 'yellow',
 			borderColor: 'rgb(255, 99, 132)',
 			borderWidth: 2,
 			data: [], /* 각 레이블에 해당하는 데이터 */
 			fill : false, /* 그래프 아래가 채워진 상태로 그려집니다. 해보세요 */
-		}]
+		},
+    {
+			label: '과속 차량',
+			backgroundColor: 'yellow',
+			borderColor: 'rgb(115, 251, 132)',
+			borderWidth: 2,
+			data: [], /* 각 레이블에 해당하는 데이터 */
+			fill : false, /* 그래프 아래가 채워진 상태로 그려집니다. 해보세요 */
+		},
+  ]
 	},
 
 	//  차트의 속성 지정
@@ -64,16 +73,16 @@ function init(enterTime) {
 	chart.update();
 }
 
-function addChartData(value) {
+function addChartData(index , value) {
 	tick++; // 도착한 데이터의 개수 증가
 	tick %= 100; // tick의 범위는 0에서 99까지만. 100보다 크면 다시 0부터 시작
-	let n = chart.data.datasets[0].data.length; // 현재 데이터의 개수
+	let n = chart.data.datasets[index].data.length; // 현재 데이터의 개수
 	if(n < LABEL_SIZE)
-		chart.data.datasets[0].data.push(value);
+		chart.data.datasets[index].data.push(value);
 	else {
 		// 새 데이터 value 삽입
-		chart.data.datasets[0].data.push(value);
-		chart.data.datasets[0].data.shift();
+		chart.data.datasets[index].data.push(value);
+		chart.data.datasets[index].data.shift();
 
 		// 레이블 삽입
 		chart.data.labels.push(tick);
