@@ -20,10 +20,8 @@ greenLed = Led(GpioManager.greenLed)
 redLed = Led(GpioManager.redLed)
 
 ledTime = 1
-greenLedStart = processManager.Value()
-redLedStart = processManager.Value()
-greenLedStart = 0
-redLedStart = 0
+greenLedStart = processManager.Value(typecode='d' , value=0)
+redLedStart = processManager.Value(typecode='d' , value=0)
 
 def onMessage(client, userdata, msg):
   content = str(msg.payload.decode("utf-8"))
@@ -91,9 +89,9 @@ def onPass(enterTime, exitTime, passTime, velocity):
 
     try:
         if(isSpeeding) :
-            greenLedStart = time.time()
+            greenLedStart.value = time.time()
         else:
-            redLedStart = time.time()
+            redLedStart.value = time.time()
     except Exception:
         import traceback
         traceback.print_exc()
@@ -114,10 +112,10 @@ SonicManager.run()
 
 try:
     while True :
-        if(time.time() - greenLedStart > 2) :
+        if(time.time() - greenLedStart.value() > 2) :
             print(greenLedStart)
             greenLed.off()
-        if(time.time() - redLedStart > 2) :
+        if(time.time() - redLedStart.value() > 2) :
             print(redLedStart)
             redLed.off()
         time.sleep(0.1)
