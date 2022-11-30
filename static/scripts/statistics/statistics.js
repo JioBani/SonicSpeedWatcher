@@ -90,6 +90,10 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
     drawChart();
 
     var endTime = dataArr[dataArr.length - 1]['enterTime'];
+    var speedingNums = 0;
+    var speedSum = 0;
+    var passTimeSum = 0;
+    var velocitySum = 0;
 
     for(var i = 0; i<20; i++){
       chartArr[i] = 0;
@@ -100,6 +104,14 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
     dataArr.forEach((data)=>{
       var i = Math.floor((endTime - data['enterTime']) / 60000);
+      speedSum += data['velocity'];
+      passTimeSum += data['passingTime'];
+      velocitySum += data['velocity'];
+
+      if(data['isSpeeding']){
+        speedingNums++;
+      }
+
       if(i < 20){
         chartArr[i]++;
         if(data['isSpeeding']){
@@ -115,6 +127,12 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
       addChartData(0,chartArr[i]);
       addChartData(1,speedingArr[i]);
     }
+
+    document.getElementById('car_numbers').innerHTML = dataArr.length();
+    document.getElementById('velocity').innerHTML = velocitySum / dataArr.length();
+    document.getElementById('passing_time').innerHTML = passTimeSum / dataArr.length();
+    document.getElementById('speeding_num').innerHTML = speedingNums;
+    document.getElementById('speeding_rate').innerHTML = speedingNums / dataArr * 100;
 
 
   } catch (error) {
