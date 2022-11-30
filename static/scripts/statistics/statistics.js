@@ -94,7 +94,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
       chartArr[i] = 0;
     }
 
-    init(chartArr);
+    init(endTime);
 
     dataArr.forEach((data)=>{
       var i = Math.floor(endTime - data['enterTime'] / 60000);

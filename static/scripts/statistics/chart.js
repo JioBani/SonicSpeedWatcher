@@ -48,11 +48,12 @@ function drawChart() {
 
 
 // chart의 차트에 labels의 크기를 LABEL_SIZE로 만들고 0~19까지 레이블 붙이기
-function init(labelArr) {
+function init(enterTime) {
 
 
-  for(let i=0; i<labelArr.length; i++) {
-		chart.data.labels[i] = labelArr[i].enterTime;
+  for(let i=19; i>=0; i--) {
+		chart.data.labels[i] = enterTime;
+    enterTime = enterTime - 60000;
 	}
 
 	chart.update();
