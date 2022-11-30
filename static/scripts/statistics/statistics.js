@@ -102,7 +102,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
       var i = Math.floor((endTime - data['enterTime']) / 60000);
       if(i < 20){
         chartArr[i]++;
-        if(data['isSpeeding'] == '과속'){
+        if(data['isSpeeding']){
           speedingArr[i]++;
         }
       }
