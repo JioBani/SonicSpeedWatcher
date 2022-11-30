@@ -34,6 +34,14 @@ mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessa
 dataManager = DataManager()
 mqttClient.run()
 
+def greenLedOn():
+    greenLed.on()
+    greenLedStart = time.time()
+
+def redLedOn():
+    redLed.on()
+    redLedStart = time.time()
+
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
 
@@ -78,11 +86,9 @@ def onPass(enterTime, exitTime, passTime, velocity):
 
     try:
         if(isSpeeding) :
-            redLedStart = time.time()
-            redLed.on()
+            redLedOn()
         else:
-            greenLedStart = time.time()
-            greenLed.on()
+            greenLedOn()
     except Exception:
         import traceback
         traceback.print_exc()
@@ -103,7 +109,11 @@ SonicManager.run()
 
 try:
     while True :
-        a = input()
+        if(time.time() - greenLedStart> 1) :
+            greenLed.off()
+        if(time.time() - redLedStart > 1) :
+            redLed.off()
+        time.sleep(0.1)
 finally:
     greenLed.off()
     redLed.off()
