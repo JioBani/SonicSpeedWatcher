@@ -112,10 +112,10 @@ SonicManager.run()
 try:
     while True :
         if(time.time() - greenLedStart > 2) :
-            print(time.time() - greenLedStart)
+            print(greenLedStart)
             greenLed.off()
         if(time.time() - redLedStart > 2) :
-            print(time.time() - redLedStart)
+            print(redLedStart)
             redLed.off()
         time.sleep(0.1)
 finally:
