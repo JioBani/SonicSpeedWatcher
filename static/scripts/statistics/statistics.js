@@ -104,9 +104,9 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
     dataArr.forEach((data)=>{
       var i = Math.floor((endTime - data['enterTime']) / 60000);
-      speedSum += data['velocity'];
-      passTimeSum += data['passingTime'];
-      velocitySum += data['velocity'];
+      speedSum += Number(data['velocity']);
+      passTimeSum += Number(data['passingTime']);
+      velocitySum += Number(data['velocity']);
 
       if(data['isSpeeding']){
         speedingNums++;
