@@ -8,6 +8,7 @@ import multiprocessing as mp
 from Led import Led
 from MqttClient import MqttClient
 from DataManager import DataManager
+from PIL import Image
 
 
 processManager = mp.Manager()
@@ -90,6 +91,10 @@ def onPass(enterTime, exitTime, passTime, velocity):
 
     with open("../static/data/passData.bin","ab") as file:
         pickle.dump(passData,file)
+
+    image = Image.open(savePath)
+    image = image.rotate(90)
+    image.save(savePath)
 
 
 
