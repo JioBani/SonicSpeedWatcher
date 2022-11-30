@@ -88,7 +88,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
       addChartData(data['velocity']);
     })
   } catch (error) {
-    print(error);
+    console.log(error);
   }
 
 }
