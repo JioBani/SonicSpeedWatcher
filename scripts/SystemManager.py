@@ -6,10 +6,11 @@ import time
 import picamera
 import multiprocessing as mp
 from Led import Led
-from threading import Thread
 from MqttClient import MqttClient
 from DataManager import DataManager
 
+
+processManager = mp.Manager()
 
 imagePath = "../static/images/"
 imageSendPath = "images/"
@@ -19,6 +20,8 @@ greenLed = Led(GpioManager.greenLed)
 redLed = Led(GpioManager.redLed)
 
 ledTime = 1
+greenLedStart = processManager.Value()
+redLedStart = processManager.Value()
 greenLedStart = 0
 redLedStart = 0
 
@@ -34,16 +37,16 @@ mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessa
 dataManager = DataManager()
 mqttClient.run()
 
-def greenLedOn():
+""" def greenLedOn():
     global greenLedStart
     greenLed.on()
-    greenLedStart = time.time()
+    greenLedStart = time.time() """
 
-def redLedOn():
+""" def redLedOn():
     global redLedStart
     redLed.on()
     redLedStart = time.time()
-
+ """
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
 
@@ -88,9 +91,9 @@ def onPass(enterTime, exitTime, passTime, velocity):
 
     try:
         if(isSpeeding) :
-            redLedOn()
+            greenLedStart = time.time()
         else:
-            greenLedOn()
+            redLedStart = time.time()
     except Exception:
         import traceback
         traceback.print_exc()
