@@ -113,7 +113,7 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
 
     for(var i = 0; i<20; i++){
       addChartData(0,chartArr[i]);
-      addChartData(0,speedingArr[i]);
+      addChartData(1,speedingArr[i]);
     }
 
 
