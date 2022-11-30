@@ -35,16 +35,6 @@ mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessa
 dataManager = DataManager()
 mqttClient.run()
 
-""" def greenLedOn():
-    global greenLedStart
-    greenLed.on()
-    greenLedStart = time.time() """
-
-""" def redLedOn():
-    global redLedStart
-    redLed.on()
-    redLedStart = time.time()
- """
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
 
