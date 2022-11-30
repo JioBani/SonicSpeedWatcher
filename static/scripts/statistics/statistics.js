@@ -128,9 +128,9 @@ function onMessageArrived(msg) { // 매개변수 msg는 도착한 MQTT 메시지
       addChartData(1,speedingArr[i]);
     }
 
-    document.getElementById('car_numbers').innerHTML = dataArr.length();
-    document.getElementById('velocity').innerHTML = velocitySum / dataArr.length();
-    document.getElementById('passing_time').innerHTML = passTimeSum / dataArr.length();
+    document.getElementById('car_numbers').innerHTML = dataArr.length;
+    document.getElementById('velocity').innerHTML = velocitySum / dataArr.length;
+    document.getElementById('passing_time').innerHTML = passTimeSum / dataArr.length;
     document.getElementById('speeding_num').innerHTML = speedingNums;
     document.getElementById('speeding_rate').innerHTML = speedingNums / dataArr * 100;
 
