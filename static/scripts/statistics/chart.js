@@ -11,16 +11,16 @@ var config = {
 		// datasets 배열로 이 차트에 그려질 모든 데이터 셋 표현. 아래는 그래프 1개만 있는 경우
 		datasets: [{
 			label: '전체 차량',
-			backgroundColor: 'yellow',
-			borderColor: 'rgb(255, 99, 132)',
+			backgroundColor: 'red',
+      borderColor: 'rgb(115, 251, 132)',
 			borderWidth: 2,
 			data: [], /* 각 레이블에 해당하는 데이터 */
 			fill : false, /* 그래프 아래가 채워진 상태로 그려집니다. 해보세요 */
 		},
     {
 			label: '과속 차량',
-			backgroundColor: 'yellow',
-			borderColor: 'rgb(115, 251, 132)',
+			backgroundColor: 'green',
+      borderColor: 'rgb(255, 99, 132)',
 			borderWidth: 2,
 			data: [], /* 각 레이블에 해당하는 데이터 */
 			fill : false, /* 그래프 아래가 채워진 상태로 그려집니다. 해보세요 */
