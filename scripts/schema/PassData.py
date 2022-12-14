@@ -1,3 +1,6 @@
+
+#. PassData 스키마
+
 class PassData:
 
   def __init__(self ,
@@ -8,12 +11,12 @@ class PassData:
                imagePath,
                isSpeeding
                ) :
-    self.enterTime = enterTime
-    self.exitTime = exitTime
-    self.passingTime = passingTime
-    self.velocity = velocity
-    self.imagePath = imagePath
-    self.isSpeeding = isSpeeding
+    self.enterTime = enterTime #. 진입 시각
+    self.exitTime = exitTime #. 진출 시각
+    self.passingTime = passingTime #. 통과 시간
+    self.velocity = velocity #. 평균 속도
+    self.imagePath = imagePath #. 이미지 경로
+    self.isSpeeding = isSpeeding #. 과속 여부
 
   def print(self) :
     print('진입 시각 : %f' % self.enterTime )

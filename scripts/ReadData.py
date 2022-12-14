@@ -1,6 +1,8 @@
 from DataIO import *
 import JsonManager
+from DataManager import DataManager
 
+#. 데이터 저장을 위한 모듈
 dataManager = DataManager()
 passDataArr = dataManager.readPassData()
 

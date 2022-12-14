@@ -7,10 +7,11 @@ import paho.mqtt.client as mqtt
 onEnter = None
 onExit = None
 onPass = None
-triggerDistance = 1000
+triggerDistance = 1000 #. 차량이 지나가고 있다고 감지할 거리 (10cm)
 enterTime = 0
-overSpeedStd = 1.5
+overSpeedStd = 1.5 #. 과속 기준
 
+#. 거리 측정
 def measureDistance(trigger,echo):
 
     '''
@@ -30,112 +31,77 @@ def measureDistance(trigger,echo):
     pulse_duration = pulse_end - pulse_start
     return 340*10000/2*pulse_duration
 
+#. 입구 초음파 센서에서 차량 감지
 def enterLoop():
     while True :
         distance = measureDistance(GpioManager.enterTrigger,GpioManager.enterEcho)
         if(distance < triggerDistance) :
-            onPassEnter(time.time())
+            onPassEnter(time.time()) #. 감지한 경우 onPassEnter 실행
             break
 
+#. 출구 초음파 센서에서 차량 감지
 def exitLoop():
+    #. matt 객체 생성
     client = mqtt.Client()
     client.connect('localhost', 1883)
     client.loop_start()
     while True :
         distance = measureDistance(GpioManager.exitTrigger,GpioManager.exitEcho)
         if(distance < triggerDistance) :
-            onPassExit(time.time() , client)
+            onPassExit(time.time() , client) #. 감지한 경우 onPassExit 실행
             break
     client.loop_stop()
 
 enterProcess = None
 exitProcess = None
 
-def onPassEnter(endTime):
+#. 차량이 입구 초음파에 감지되었을때
+def onPassEnter(checkTime):
     global enterProcess, exitProcess, enterTime
+
+    #. 입구 초음파 작동 중지
     if(enterProcess != None):
         enterProcess.close()
-    print("입장 시간 : %f" % endTime)
-    enterTime = endTime
+    print("입장 시간 : %f" % checkTime)
+
+    #. 진입 시각을 기록(checkTime : 감지된 시각)
+    enterTime = checkTime
+
+    #. 출구 초음파 센서 감지 프로세스 시작
     exitProcess = mp.Process(name="ExitProcess",target=exitLoop)
     exitProcess.start()
 
+#. 차량이 출구 초음파에 감지되었을때
 def onPassExit(endTime , client):
     global enterProcess, exitProcess, enterTime
 
-    passTime = endTime - enterTime
-    kmPerH = 200 / passTime / 1000 * 3.6
+    passTime = endTime - enterTime #. 통과하는데 걸린 시간 계산
+    kmPerH = 200 / passTime / 1000 * 3.6 #. 평균 속도 계산
+
+    #. 과속 판별
     if(kmPerH > overSpeedStd) :
         client.publish('velocity' , str(kmPerH) + '/과속')
     else :
         client.publish('velocity' , str(kmPerH) + '/정속')
 
+    #. SystemManager의 콜백 실행
     onPass(enterTime, endTime , passTime , kmPerH)
+
+    #. 출구 초음파 종료
     exitProcess.close()
+
+    #. 입구 초음파 실행
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
 
 
+#. SonicManager 시작
 def run():
     global enterProcess
     enterProcess = mp.Process(name="EnterProcess",target=enterLoop)
     enterProcess.start()
 
+#. SonicManager 정지
 def stop():
     if(enterProcess.is_alive) : enterProcess.kill()
     if(exitProcess.is_alive) : enterProcess.kill()
-
-
-""" class SonicManager:
-    def __init__(self):
-        GpioManager.setSonic()
-        self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,self.onPassEnter)
-        self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,self.onPassExit)
-        self.enterTime = 0
-        self.onPass = None
-        self.enterProcess = mp.Process(name="EnterProcess",target=self.enterSonic.sonicSubLoop)
-        self.exitProcess = None
-        self.isFirst = True
-
-    def onPassEnter(self,endTime) :
-        if(self.isFirst == True) :
-            self.isFirst = False
-        else :
-            self.enterProcess.terminate()
-
-        print("입장 시간 : %f" % endTime)
-        self.enterTime = endTime
-        self.exitProcess = mp.Process(name="ExitProcess",target=self.exitSonic.sonicSubLoop)
-        self.exitProcess.start()
-
-#        self.enterSonic.stop()
-#        print("입장 시간 : %f" % endTime)
-#        self.enterTime = endTime
-#       self.exitSonic = Sonic(GpioManager.exitTrigger,GpioManager.exitEcho,1000 ,self.onPassExit)
-#        self.exitSonic.start()
-
-    def onPassExit(self,endTime):
-        #if(self.exitProcess.is_alive) :
-         #   self.exitProcess.terminate()
-        passTime = endTime - self.enterTime
-        kmPerH = 200 / passTime / 1000 * 3.6
-        self.onPass(endTime , passTime , kmPerH)
-        self.enterProcess = mp.Process(name="EnterProcess",target=self.enterSonic.sonicSubLoop)
-        self.enterProcess.start()
-
-#        self.exitSonic.stop()
-#        passTime = endTime - self.enterTime
-#        kmPerH = 200 / passTime / 1000 * 3.6
-#        self.onPass(endTime , passTime , kmPerH)
-#        self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,self.onPassEnter)
-#        self.enterSonic.start()
-
-
-
-    def run(self):
-        self.enterProcess.start()
-        while True :
-            input("멈추려면 아무키나 눌러주세요")
-
-    def setOnPass(self , onPass):
-        self.onPass = onPass """

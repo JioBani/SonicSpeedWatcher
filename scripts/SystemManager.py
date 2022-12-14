@@ -53,6 +53,7 @@ def capture(path):
     camera.close()
 
 #. SonicManager에서 차량이 단속 구간을 통과했을때 실행될 콜백
+#. 데이터 저장 , 사진 촬영 및 저장, Led 점등
 def onPass(enterTime, exitTime, passTime, velocity):
     global camera, speedingStd
 
@@ -72,12 +73,12 @@ def onPass(enterTime, exitTime, passTime, velocity):
     savePath = "%s%f.jpg" % (imagePath,imageTime)
     sendPath = "%s%f.jpg" % (imageSendPath,imageTime)
 
-    #path = getImagePath()
     #. 사진 촬영 실행
     cameraProcess = mp.Process(target=capture,args=(savePath,))
     cameraProcess.start()
     cameraProcess.join()
 
+    #. 저장할 데이터 생성
     passData = PassData(
         enterTime=enterTime,
         exitTime=exitTime,
@@ -87,6 +88,7 @@ def onPass(enterTime, exitTime, passTime, velocity):
         isSpeeding=isSpeeding
     )
 
+    #. led 점등
     try:
         if(not isSpeeding) :
             greenLedStart.value = time.time()
@@ -98,9 +100,11 @@ def onPass(enterTime, exitTime, passTime, velocity):
         import traceback
         traceback.print_exc()
 
+    #. 데이터를 이어서 저장
     with open("../static/data/passData.bin","ab") as file:
         pickle.dump(passData,file)
 
+    #. 파이카메라가 옆으로 누워서 배치되어 있기 때문에 90도 회전해서 저장
     image = Image.open(savePath)
     image = image.rotate(90)
     image.save(savePath)
@@ -109,22 +113,25 @@ def onPass(enterTime, exitTime, passTime, velocity):
 
 print("시작")
 
+#. GPIO 설정
 GpioManager.init()
 GpioManager.setSonic()
 GpioManager.setLed()
 
+#. SonicManager 초기화 및 실행
 SonicManager.onPass = onPass
 SonicManager.run()
 
 try:
     while True :
+        #. Led가 2초 지나면 꺼지도록
         if(time.time() - greenLedStart.value > ledTime) :
             greenLed.off()
         if(time.time() - redLedStart.value > ledTime) :
             redLed.off()
         time.sleep(0.1)
 finally:
-    greenLed.off()
-    redLed.off()
-    SonicManager.stop()
+    greenLed.off() #. 센서 초기화
+    redLed.off() #. 센서 초기화
+    SonicManager.stop() #. 프로세스 종료
     mqttClient.stop()
