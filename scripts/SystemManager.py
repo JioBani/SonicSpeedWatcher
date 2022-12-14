@@ -11,42 +11,52 @@ from DataManager import DataManager
 from PIL import Image
 
 
-processManager = mp.Manager()
+processManager = mp.Manager() #. 프로세스 관리를 위한 객체
+dataManager = DataManager() #. 데이터 입출력을 위한 객체
 
 imagePath = "../static/images/"
 imageSendPath = "images/"
-speedingStd = 1.5
+speedingStd = 1.5 #. 과속 기준(1.5km)
+ledTime = 2 #. led가 켜지는 시간(2초)
 
 greenLed = Led(GpioManager.greenLed)
 redLed = Led(GpioManager.redLed)
 
-ledTime = 2
+#. 멀티 프로세스에서 값을 동기화 하기 위한 작업
+#. led의 시작 시간 변수 선언
 greenLedStart = processManager.Value(typecode='d' , value=0)
 redLedStart = processManager.Value(typecode='d' , value=0)
 
+#. mqtt에서 데이터를 달라는 메세지를 받았을때
 def onMessage(client, userdata, msg):
   content = str(msg.payload.decode("utf-8"))
   print(content)
+  #. 데이터를 읽어서 "json_response" 토픽으로 송신
   if(content == 'request'):
         message = dataManager.readByJson()
         mqttClient.publish("json_response", message)
         print("sending %s" % message)
 
+#.mqtt 통신
 mqttClient = MqttClient(ip="localhost" , topic="json_request" ,onMessage=onMessage)
-dataManager = DataManager()
 mqttClient.run()
 
+
+#. 저장할 이미지의 경로 반환
 def getImagePath():
     return "%s%f.jpg" % (imagePath,time.time())
 
+#. pi camera로 사진 촬영
 def capture(path):
     camera = picamera.PiCamera()
     camera.capture(path,use_video_port = True)
     camera.close()
 
+#. SonicManager에서 차량이 단속 구간을 통과했을때 실행될 콜백
 def onPass(enterTime, exitTime, passTime, velocity):
     global camera, speedingStd
 
+    #. 과속인지 판별
     if(velocity > speedingStd) : isSpeeding = True
     else : isSpeeding = False
 
@@ -56,15 +66,14 @@ def onPass(enterTime, exitTime, passTime, velocity):
     print("평균 속도 : %f" % velocity)
     print("과속" if isSpeeding else "정속")
 
+    #. 현재 시각으로 이미지 이름을 만듬
+    #. 앱에서 저장할때와 웹에서 접근할때 경로가 다르기 때문에 따로 적용
     imageTime = time.time()
     savePath = "%s%f.jpg" % (imagePath,imageTime)
     sendPath = "%s%f.jpg" % (imageSendPath,imageTime)
 
-    if(isSpeeding) : pubString = '%f/과속' %(velocity)
-    else : pubString = '%f/정속' %(velocity)
-    #mqttClient.publish(topic="velocity" , msg=pubString)
-
-    path = getImagePath()
+    #path = getImagePath()
+    #. 사진 촬영 실행
     cameraProcess = mp.Process(target=capture,args=(savePath,))
     cameraProcess.start()
     cameraProcess.join()
@@ -110,10 +119,8 @@ SonicManager.run()
 try:
     while True :
         if(time.time() - greenLedStart.value > ledTime) :
-            #print(greenLedStart)
             greenLed.off()
         if(time.time() - redLedStart.value > ledTime) :
-            #print(redLedStart)
             redLed.off()
         time.sleep(0.1)
 finally:

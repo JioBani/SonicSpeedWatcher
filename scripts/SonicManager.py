@@ -1,11 +1,7 @@
 import time
-from Sonic import Sonic
 from GpioManager import GpioManager
-import signal
 import multiprocessing as mp
 import RPi.GPIO as GPIO
-import os
-import traceback
 import paho.mqtt.client as mqtt
 
 onEnter = None
@@ -53,9 +49,7 @@ def exitLoop():
     client.loop_stop()
 
 enterProcess = None
-#mp.Process(name="EnterProcess",target=enterLoop)
 exitProcess = None
-#mp.Process(name="ExitProcess",target=exitLoop)
 
 def onPassEnter(endTime):
     global enterProcess, exitProcess, enterTime
@@ -92,7 +86,7 @@ def stop():
     if(exitProcess.is_alive) : enterProcess.kill()
 
 
-class SonicManager:
+""" class SonicManager:
     def __init__(self):
         GpioManager.setSonic()
         self.enterSonic = Sonic(GpioManager.enterTrigger,GpioManager.enterEcho, 1000 ,self.onPassEnter)
@@ -144,4 +138,4 @@ class SonicManager:
             input("멈추려면 아무키나 눌러주세요")
 
     def setOnPass(self , onPass):
-        self.onPass = onPass
+        self.onPass = onPass """
