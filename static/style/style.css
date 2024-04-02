@@ -19,6 +19,7 @@ body {
     height: 45px;
     display: flex;
     align-items: center;
+    z-index: 100;
 }
 
 .sidebar .menu{
@@ -27,6 +28,7 @@ body {
     height: 45px;
     display: flex;
     align-items: center;
+    z-index: 100;
 }
 
 .sidebar .icon{
@@ -108,4 +110,8 @@ body {
 
 .show_table .blank{
     table-layout: fixed;
+}
+
+.td_speeding{
+    color: red;
 }

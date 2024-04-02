@@ -10,16 +10,16 @@
 
 <body>
   <div class="sidebar">
-    <div class="menu">
-      <img class="icon" src="../static/web_image/icon_setting.svg" width="25px" height="25px">
+    <div class="select_menu">
+      <img class="icon" src="../static/web_image/List.svg" onclick="location.replace('http:/\/192.168.137.42:8080/')" width="25px" height="25px">
       <span class="title">
-        Settings
+        List
       </span>
     </div>
-    <div class="select_menu">
-      <img class="icon" src="../static/web_image/icon_setting.svg" width="25px" height="25px">
+    <div class="menu">
+      <img class="icon" src="../static/web_image/chart.svg" onclick="location.replace('http:/\/192.168.137.42:8080/statistics')" width="25px" height="25px">
       <span class="title">
-        Show
+        Statistics
       </span>
     </div>
     <!--profile image & text-->
@@ -44,16 +44,13 @@
             <td>{% print(exitTime) %}</td>
             <td>{% print(passingTime) %}</td>
             <td>{% print(velocity) %}</td>
-            <td>{% print(isSpeeding) %}</td>
+            <td style="color: red;">{% print(isSpeeding) %}</td>
           </tr>
         </tbody>
       </table>
       <div class="car_image">
         <img class = "icon" src="{{ url_for('static', filename=imagePath) }}" >
       </div>
-      <button>
-        asdsd
-      </button>
     </div>
   </div>
 </body>
