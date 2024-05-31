@@ -41,7 +41,7 @@
 
 ## ⚙ 시스템 구조
 
-![5](README.assets/5.png)
+<img src="README.assets/image-20240531202711666.png" alt="image-20240531202711666" style="zoom:50%;" />
 
 
 
