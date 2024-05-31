@@ -39,9 +39,9 @@
 
 
 
-## ⚙ 시스템 구조
+## ⚙ 시스템 구성도
 
-<img src="README.assets/image-20240531202711666.png" alt="image-20240531202711666" style="zoom:50%;" />
+<img src="README.assets/image-20240531204820633.png" alt="image-20240531204820633" style="zoom:50%;" />
 
 
 
